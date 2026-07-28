@@ -1140,6 +1140,50 @@ a { color: inherit; }
     letter-spacing: 0.01em;
 }
 
+.work-stack-prev {
+    opacity: 0.75;
+}
+
+.work-thumb-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.work-thumb-prev {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    border: var(--stroke) solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--bg-alt);
+}
+
+.work-thumb-prev img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex: none;
+    opacity: 0.85;
+    filter: grayscale(0.25);
+}
+
+.work-thumb-prev span {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    line-height: 1.25;
+}
+
+@media (max-width: 900px) {
+    .work-thumb-col {
+        max-width: 280px;
+        justify-self: end;
+    }
+}
+
 .work-tag {
     font-family: var(--mono);
     font-size: 0.62rem;

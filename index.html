@@ -68,7 +68,7 @@
 <span class="t-group"><span class="t-line"><span class="t-prompt">$</span> <span data-i18n="term_cmd2">stack --brief</span></span>
 <span class="t-line t-out" data-i18n="term_out2">soporte técnico · sql-server · t-sql · csharp · dotnet · python · batch</span></span>
 <span class="t-group"><span class="t-line"><span class="t-prompt">$</span> <span data-i18n="term_cmd3">st2 status</span></span>
-<span class="t-line t-out t-accent" data-i18n="term_out3">4 módulos activos · exe + web + backup + consola</span></span></code></pre>
+<span class="t-line t-out t-accent" data-i18n="term_out3">3 módulos activos · web + sql toolkit + consola</span></span></code></pre>
                     </div>
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary" data-i18n="hero_cta_projects">Ver proyectos</a>
@@ -100,11 +100,11 @@
                 <div class="prose">
                     <p data-i18n="about_p1">Me interesa resolver de raíz: dejar el sistema estable, el caso bien documentado y que quien lo retome no tenga que reconstruir todo desde cero.</p>
                     <p data-i18n="about_p2">En <strong>Thomson Reuters</strong> doy soporte técnico de <strong>Bejerman</strong> a empresas y estudios contables — instalaciones, SQL Server y consultas.</p>
-                    <p data-i18n="about_p3">Para la mesa de ayuda armé <strong>ST2</strong> — <strong>S</strong>oluciones <strong>T</strong>ecnológicas: herramientas propias para que el agente trabaje más cómodo y consistente. Empezó con un .bat de mantenimiento; hoy suma exe, backup de bases y versión web en <strong>C# / .NET</strong>.</p>
+                    <p data-i18n="about_p3">Para la mesa de ayuda armé <strong>ST2</strong> — <strong>S</strong>oluciones <strong>T</strong>ecnológicas: herramientas propias para que el agente trabaje más cómodo y consistente. Empezó con un .bat de mantenimiento; hoy suma una versión web (ex escritorio) y un kit de mantenimiento SQL, todo en <strong>C# / .NET</strong>.</p>
                 </div>
                 <aside class="note-card">
                     <p class="note-label" data-i18n="note_label">// por qué ST2</p>
-                    <p data-i18n="note_body">Cada módulo cerró algo repetitivo en soporte: chequeos de instalación a mano, backups lentos, textos de ticket distintos según quién atendía. Primero la consola .bat, después el exe, el backup y la web.</p>
+                    <p data-i18n="note_body">Cada módulo cerró algo repetitivo en soporte: chequeos de instalación a mano, backups lentos, textos de ticket distintos según quién atendía. Primero la consola .bat, después el escritorio (mutado a web) y el kit de SQL.</p>
                 </aside>
                 <p class="disclaimer" data-i18n="st2_disclaimer">Las herramientas ST2 no representan productos ni posiciones oficiales de Thomson Reuters.</p>
             </div>
@@ -211,33 +211,24 @@
                             <div class="work-top">
                                 <div class="work-meta">
                                     <a href="https://st2.tolei.dev" class="work-link" target="_blank" rel="noopener noreferrer" data-i18n="link_live">st2.tolei.dev ↗</a>
+                                    <span class="work-tag" data-i18n="proj_st2web_badge">Versión actual</span>
                                 </div>
                                 <h4 data-i18n="proj_st2web_title">ST2 WEB</h4>
                             </div>
-                            <p data-i18n="proj_st2web_p1">La suite en el navegador — último paso de la evolución. Misma lógica que el exe, API en servidor. Planillas y buscador sin instalar nada.</p>
-                            <p class="work-stack">ASP.NET Core 9 · JavaScript · REST</p>
+                            <p data-i18n="proj_st2web_p1">Empezó como ejecutable de escritorio (WPF + WebView2 + SQLite) y mutó a esta versión web sin perder funciones: mismo buscador del Portal Cliente, planillas y documentación técnica, ahora accesible desde el navegador sin instalar nada. El .exe quedó discontinuado.</p>
+                            <p class="work-stack">ASP.NET Core 9 · JavaScript · REST <span class="work-stack-prev" data-i18n="proj_st2web_stack_prev">· antes: WPF · WebView2 · SQLite</span></p>
                         </div>
-                        <a class="work-thumb work-thumb--hover" href="https://st2.tolei.dev" target="_blank" rel="noopener noreferrer" aria-label="ST2 WEB">
-                            <img class="work-thumb__cover" src="assets/projects/media/st2-web.png" alt="ST2 WEB" loading="lazy">
-                            <span class="work-thumb__preview" aria-hidden="true">
-                                <img data-src="assets/projects/media/st2-web-hover.gif" alt="">
-                            </span>
-                        </a>
-                    </article>
-
-                    <article class="work-item work-item--featured">
-                        <div class="work-body">
-                            <div class="work-top">
-                                <div class="work-meta">
-                                    <span class="work-tag" data-i18n="proj_st2_badge">Ejecutable · .NET</span>
-                                </div>
-                                <h4 data-i18n="proj_st2_title">ST2.exe</h4>
+                        <div class="work-thumb-col">
+                            <a class="work-thumb work-thumb--hover" href="https://st2.tolei.dev" target="_blank" rel="noopener noreferrer" aria-label="ST2 WEB">
+                                <img class="work-thumb__cover" src="assets/projects/media/st2-web.png" alt="ST2 WEB" loading="lazy">
+                                <span class="work-thumb__preview" aria-hidden="true">
+                                    <img data-src="assets/projects/media/st2-web-hover.gif" alt="">
+                                </span>
+                            </a>
+                            <div class="work-thumb-prev" title="ST2.exe — versión anterior de escritorio (discontinuada)">
+                                <img src="assets/projects/media/st2-desktop.jpg" alt="ST2.exe — versión anterior de escritorio" loading="lazy">
+                                <span data-i18n="proj_st2web_prev_label">Antes: escritorio (.exe)</span>
                             </div>
-                            <p data-i18n="proj_st2_p1">Ejecutable desktop de la suite, usado en producción hasta la migración web. Documentación de casos, base de conocimiento y recursos técnicos en un solo ejecutable.</p>
-                            <p class="work-stack">C# · .NET 8 · WPF · WebView2 · SQLite</p>
-                        </div>
-                        <div class="work-thumb work-thumb--hover" tabindex="0" role="img" aria-label="ST2.exe">
-                            <img class="work-thumb__cover" src="assets/projects/media/st2-desktop.jpg" alt="ST2.exe — Sistema de Planillas Automáticas" loading="lazy">
                         </div>
                     </article>
 
@@ -246,12 +237,13 @@
                             <div class="work-top">
                                 <div class="work-meta">
                                     <span class="work-tag">SQL</span>
+                                    <span class="work-tag" data-i18n="proj_sbbackup_badge_profiler">Profiler</span>
                                     <span class="work-tag">IA</span>
                                 </div>
-                                <h4 data-i18n="proj_sbbackup_title">ST2 — Backup, Restore y Queries</h4>
+                                <h4 data-i18n="proj_sbbackup_title">ST2 — Backup, Restore y Monitor SQL</h4>
                             </div>
-                            <p data-i18n="proj_sbbackup_p1">Suite de mantenimiento para sistemas Bejerman: detección automática de bases por empresa, backups y restauración con vista previa de metadatos, y un ejecutor de scripts SQL con consultas frecuentes, backup de seguridad automático antes de modificar datos y explicación del script en lenguaje simple antes de correrlo, vía IA.</p>
-                            <p class="work-stack">C# · WinForms · T-SQL · IA (Groq)</p>
+                            <p data-i18n="proj_sbbackup_p1">Suite de mantenimiento para sistemas Bejerman: detección automática de bases por empresa, backup y restauración con vista previa de metadatos, un ejecutor de scripts SQL con consultas frecuentes y backup de seguridad automático antes de modificar datos, y un monitor de traza tipo Profiler (Extended Events) que detecta errores en vivo. La IA explica scripts y errores en lenguaje simple, leyendo el esquema real de la base conectada.</p>
+                            <p class="work-stack">C# · WinForms · T-SQL · Extended Events · IA (Groq)</p>
                         </div>
                         <div class="work-thumb work-thumb--hover" tabindex="0" role="img" aria-label="ST2 Backup">
                             <img class="work-thumb__cover" src="assets/projects/media/sbbackup.png" alt="ST2 Backup y Restauración" loading="lazy">
