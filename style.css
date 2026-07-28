@@ -1160,14 +1160,15 @@ a { color: inherit; }
     background: var(--bg-alt);
 }
 
-.work-thumb-prev img {
+.work-thumb--mini {
     width: 56px;
-    aspect-ratio: 16 / 10;
-    object-fit: contain;
-    border-radius: 4px;
     flex: none;
+    box-shadow: none;
+    cursor: zoom-in;
+}
+
+.work-thumb--mini .work-thumb__cover {
     background: #fff;
-    border: 1px solid var(--ink);
 }
 
 .work-thumb-prev span {
