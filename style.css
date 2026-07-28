@@ -1154,20 +1154,20 @@ a { color: inherit; }
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 8px;
-    border: var(--stroke) solid var(--ink);
+    padding: 6px 8px;
+    border: var(--stroke) dashed var(--text-dim);
     border-radius: var(--radius);
     background: var(--bg-alt);
 }
 
 .work-thumb-prev img {
-    width: 32px;
-    height: 32px;
-    object-fit: cover;
+    width: 56px;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
     border-radius: 4px;
     flex: none;
-    opacity: 0.85;
-    filter: grayscale(0.25);
+    background: #fff;
+    border: 1px solid var(--ink);
 }
 
 .work-thumb-prev span {
