@@ -66,9 +66,9 @@
                         <pre class="terminal-body"><code><span class="t-group"><span class="t-line"><span class="t-prompt">$</span> <span data-i18n="term_cmd1">whoami</span></span>
 <span class="t-line t-out"><span data-i18n="term_out1">leonel.gallo · buenos aires</span><span class="t-emblems" aria-hidden="true"><img src="assets/flag-ar.svg" alt="" class="site-emblem site-emblem--ar" width="18" height="12"></span></span></span>
 <span class="t-group"><span class="t-line"><span class="t-prompt">$</span> <span data-i18n="term_cmd2">stack --brief</span></span>
-<span class="t-line t-out" data-i18n="term_out2">soporte técnico · sql-server · t-sql · csharp · dotnet · python · batch</span></span>
+<span class="t-line t-out" data-i18n="term_out2">soporte técnico · sql-server · t-sql · csharp · dotnet · python · powershell</span></span>
 <span class="t-group"><span class="t-line"><span class="t-prompt">$</span> <span data-i18n="term_cmd3">st2 status</span></span>
-<span class="t-line t-out t-accent" data-i18n="term_out3">3 módulos activos · web + sql toolkit + consola</span></span></code></pre>
+<span class="t-line t-out t-accent" data-i18n="term_out3">3 módulos activos · web · sql · powershell</span></span></code></pre>
                     </div>
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary" data-i18n="hero_cta_projects">Ver proyectos</a>
@@ -83,7 +83,7 @@
                         <span class="chip chip--accent" data-i18n="chip_sql">SQL Server</span>
                         <span class="chip" data-i18n="chip_dotnet">.NET</span>
                         <span class="chip" data-i18n="chip_csharp">C#</span>
-                        <span class="chip chip--accent" data-i18n="chip_batch">Batch</span>
+                        <span class="chip chip--accent" data-i18n="chip_ps">PowerShell</span>
                         <span class="chip" data-i18n="chip_tsql">T-SQL</span>
                         <span class="chip chip--accent" data-i18n="chip_python">Python</span>
                     </div>
@@ -100,11 +100,11 @@
                 <div class="prose">
                     <p data-i18n="about_p1">Me interesa resolver de raíz: dejar el sistema estable, el caso bien documentado y que quien lo retome no tenga que reconstruir todo desde cero.</p>
                     <p data-i18n="about_p2">En <strong>Thomson Reuters</strong> doy soporte técnico de <strong>Bejerman</strong> a empresas y estudios contables — instalaciones, SQL Server y consultas.</p>
-                    <p data-i18n="about_p3">Para la mesa de ayuda armé <strong>ST2</strong> — <strong>S</strong>oluciones <strong>T</strong>ecnológicas: herramientas propias para que el agente trabaje más cómodo y consistente. Empezó con un .bat de mantenimiento; hoy suma una versión web (ex escritorio) y un kit de mantenimiento SQL, todo en <strong>C# / .NET</strong>.</p>
+                    <p data-i18n="about_p3">Para la mesa de ayuda armé <strong>ST2</strong> — <strong>S</strong>oluciones <strong>T</strong>ecnológicas: herramientas propias para que el agente trabaje más cómodo y consistente. Empezó como consola de mantenimiento; hoy es una suite: web (ex escritorio), kit SQL y la consola reescrita en <strong>PowerShell</strong>, con el resto en <strong>C# / .NET</strong>.</p>
                 </div>
                 <aside class="note-card">
                     <p class="note-label" data-i18n="note_label">// por qué ST2</p>
-                    <p data-i18n="note_body">Cada módulo cerró algo repetitivo en soporte: chequeos de instalación a mano, backups lentos, textos de ticket distintos según quién atendía. Primero la consola .bat, después el escritorio (mutado a web) y el kit de SQL.</p>
+                    <p data-i18n="note_body">Cada módulo cerró algo repetitivo en soporte: chequeos de instalación a mano, backups lentos, textos de ticket distintos según quién atendía. Primero la consola (ahora PowerShell), después el escritorio — mutado a web — y el kit de SQL.</p>
                 </aside>
                 <p class="disclaimer" data-i18n="st2_disclaimer">Las herramientas ST2 no representan productos ni posiciones oficiales de Thomson Reuters.</p>
             </div>
@@ -211,11 +211,12 @@
                             <div class="work-top">
                                 <div class="work-meta">
                                     <a href="https://st2.tolei.dev" class="work-link" target="_blank" rel="noopener noreferrer" data-i18n="link_live">st2.tolei.dev ↗</a>
-                                    <span class="work-tag" data-i18n="proj_st2web_badge">Versión actual</span>
+                                    <span class="work-tag">Planillas</span>
+                                    <span class="work-tag">Portal</span>
                                 </div>
                                 <h4 data-i18n="proj_st2web_title">ST2 WEB</h4>
                             </div>
-                            <p data-i18n="proj_st2web_p1">Empezó como ejecutable de escritorio (WPF + WebView2 + SQLite) y mutó a esta versión web sin perder funciones: mismo buscador del Portal Cliente, planillas y documentación técnica, ahora accesible desde el navegador sin instalar nada. El .exe quedó discontinuado.</p>
+                            <p data-i18n="proj_st2web_p1">App web de la mesa de ayuda: planillas automáticas (transferencia entre mesas, referral I+D y oportunidades), buscador del Portal Cliente, THOM y AI Platform integrados. Módulos internos con acceso por usuario. Nació como .exe de escritorio (WPF + WebView2 + SQLite); el ejecutable quedó discontinuado.</p>
                             <p class="work-stack">ASP.NET Core 9 · JavaScript · REST <span class="work-stack-prev" data-i18n="proj_st2web_stack_prev">· antes: WPF · WebView2 · SQLite</span></p>
                         </div>
                         <div class="work-thumb-col">
@@ -240,15 +241,16 @@
                                 <div class="work-meta">
                                     <span class="work-tag">SQL</span>
                                     <span class="work-tag" data-i18n="proj_sbbackup_badge_profiler">Profiler</span>
+                                    <span class="work-tag" data-i18n="proj_sbbackup_badge_schedule">Programado</span>
                                     <span class="work-tag">IA</span>
                                 </div>
-                                <h4 data-i18n="proj_sbbackup_title">ST2 — Backup, Restore y Monitor SQL</h4>
+                                <h4 data-i18n="proj_sbbackup_title">ST2 — Herramientas SQL</h4>
                             </div>
-                            <p data-i18n="proj_sbbackup_p1">Suite de mantenimiento para sistemas Bejerman: detección automática de bases por empresa, backup y restauración con vista previa de metadatos, un ejecutor de scripts SQL con consultas frecuentes y backup de seguridad automático antes de modificar datos, y un monitor de traza tipo Profiler (Extended Events) que detecta errores en vivo. La IA explica scripts y errores en lenguaje simple, leyendo el esquema real de la base conectada.</p>
+                            <p data-i18n="proj_sbbackup_p1">Mantenimiento para sistemas Bejerman: detección automática de bases por empresa, backup y restore con vista previa de metadatos, backups programados en el Programador de tareas de Windows, un ejecutor de scripts con consultas frecuentes y backup de seguridad antes de tocar datos, y una traza tipo Profiler (Extended Events) con errores en vivo. La IA explica scripts y errores en lenguaje simple, leyendo el esquema real de la base conectada.</p>
                             <p class="work-stack">C# · WinForms · T-SQL · Extended Events · IA (Groq)</p>
                         </div>
-                        <div class="work-thumb work-thumb--hover" tabindex="0" role="img" aria-label="ST2 Backup, Restore y Monitor SQL">
-                            <img class="work-thumb__cover" src="assets/projects/media/sbbackup.png" alt="ST2 Backup, Restore y Monitor SQL" loading="lazy">
+                        <div class="work-thumb work-thumb--hover" tabindex="0" role="img" aria-label="ST2 Herramientas SQL">
+                            <img class="work-thumb__cover" src="assets/projects/media/sbbackup.png" alt="ST2 Herramientas SQL" loading="lazy">
                         </div>
                     </article>
 
@@ -256,15 +258,15 @@
                         <div class="work-body">
                             <div class="work-top">
                                 <div class="work-meta">
-                                    <span class="work-tag">Console</span>
+                                    <span class="work-tag">PowerShell</span>
                                 </div>
-                                <h4 data-i18n="proj_st2bat_title">ST2.bat — Mantenimiento Bejerman</h4>
+                                <h4 data-i18n="proj_st2bat_title">ST2.BAT — Mantenimiento Bejerman</h4>
                             </div>
-                            <p data-i18n="proj_st2bat_p1">El primer módulo de la suite: consola de campo que automatiza tareas que antes hacíamos a mano — permisos, rutas de ejecutables, restricciones, registro de DLLs y archivos — y centraliza el diagnóstico de la instalación vía registro de Windows.</p>
-                            <p class="work-stack">Batch · PowerShell · Registro Windows</p>
+                            <p data-i18n="proj_st2bat_p1">El primer módulo de la suite, reescrito en PowerShell 5.1: consola de campo que arma la planilla técnica, registra componentes (DLL, Crystal, TLB, DCUBE) y diagnostica la instalación — compatibilidad, archivos renombrados, UPDATES vs Local, lentitud en RDP. Se entrega como .bat autoejecutable para usarla en el puesto sin instalar nada extra.</p>
+                            <p class="work-stack">PowerShell 5.1 · Registro Windows</p>
                         </div>
-                        <div class="work-thumb work-thumb--hover" tabindex="0" role="img" aria-label="ST2.bat">
-                            <img class="work-thumb__cover" src="assets/projects/media/st2-bat.png" alt="ST2.bat" loading="lazy">
+                        <div class="work-thumb work-thumb--hover" tabindex="0" role="img" aria-label="ST2.BAT">
+                            <img class="work-thumb__cover" src="assets/projects/media/st2-bat.png" alt="ST2.BAT" loading="lazy">
                             <span class="work-thumb__preview" aria-hidden="true">
                                 <img data-src="assets/projects/media/st2-bat-hover.gif" alt="">
                             </span>
