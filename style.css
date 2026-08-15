@@ -1,3 +1,11 @@
+html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="light"] { color-scheme: light; }
+
+::selection {
+    background: color-mix(in srgb, var(--accent) 82%, var(--ink));
+    color: #fff;
+}
+
 :root {
     --accent: #F35C19;
     --accent-dim: rgba(243, 92, 25, 0.14);
@@ -89,9 +97,9 @@ body {
     color: var(--text);
     background-color: var(--bg);
     background-image:
-        linear-gradient(color-mix(in srgb, var(--border-soft) 55%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--border-soft) 55%, transparent) 1px, transparent 1px);
-    background-size: 28px 28px;
+        linear-gradient(color-mix(in srgb, var(--border-soft) 28%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--border-soft) 28%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -110,8 +118,10 @@ a { color: inherit; }
     left: 0;
     right: 0;
     z-index: 100;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid transparent;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .site-header.scrolled {
@@ -301,6 +311,19 @@ a { color: inherit; }
 .btn-ghost:hover {
     color: var(--text);
     background: var(--bg-alt);
+}
+
+.btn:focus-visible,
+.site-nav a:focus-visible,
+.util-btn:focus-visible,
+.work-link:focus-visible,
+.contact-primary:focus-visible,
+.contact-channels a:focus-visible,
+.nav-toggle:focus-visible,
+.lang-toggle:focus-visible,
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* ── Hero ── */
@@ -625,6 +648,19 @@ a { color: inherit; }
     .chip {
         animation: none;
     }
+
+    .work-thumb--hover,
+    .work-thumb--hover:hover,
+    .work-thumb--hover:focus-visible,
+    .work-thumb--game.work-thumb--hover:hover,
+    .work-thumb--game.work-thumb--hover:focus-visible,
+    .exp-row:hover,
+    .btn:hover,
+    .site-nav a:hover,
+    .util-btn:hover {
+        transform: none;
+        animation: none;
+    }
 }
 
 /* ── Blocks ── */
@@ -764,6 +800,22 @@ a { color: inherit; }
     background: var(--surface);
     box-shadow: var(--shadow);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exp-row--now {
+    border-left: 5px solid var(--accent);
+}
+
+.exp-row--now time::after {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim);
+    vertical-align: 1px;
 }
 
 .exp-row:hover {
@@ -1003,6 +1055,11 @@ a { color: inherit; }
     align-items: start;
     position: relative;
     z-index: 1;
+    transition: box-shadow 0.2s ease;
+}
+
+.work-item:hover {
+    box-shadow: var(--shadow-lg);
 }
 
 .work-item--featured {
@@ -1073,7 +1130,7 @@ a { color: inherit; }
 .work-thumb--hover:hover,
 .work-thumb--hover:focus-visible {
     z-index: 20;
-    transform: scale(3.05);
+    transform: scale(2.55);
     box-shadow: 6px 6px 0 var(--shadow-pop), var(--shadow-float);
 }
 
@@ -1283,8 +1340,10 @@ a { color: inherit; }
     font-weight: 500;
     color: var(--text-muted);
     text-decoration: none;
-    padding: 4px 0;
-    transition: color 0.15s;
+    padding: 6px 8px;
+    margin: 0 -8px;
+    border-radius: var(--radius);
+    transition: color 0.15s, background 0.15s, transform 0.15s;
 }
 
 .contact-icon {
@@ -1311,6 +1370,7 @@ a { color: inherit; }
 
 .contact-channels a:hover {
     color: var(--accent);
+    background: var(--accent-dim);
 }
 
 .contact-channels a:hover .contact-icon {
@@ -1424,4 +1484,13 @@ a { color: inherit; }
     .block { padding: 56px 0; }
 
     .hero { padding: 80px 0 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .work-thumb--hover:hover,
+    .work-thumb--hover:focus-visible,
+    .work-thumb--game.work-thumb--hover:hover,
+    .work-thumb--game.work-thumb--hover:focus-visible {
+        transform: none;
+    }
 }
