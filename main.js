@@ -88,9 +88,10 @@ const translations = {
         nav_experience: 'Trayectoria',
         nav_projects: 'Proyectos',
         nav_contact: 'Contacto',
+        skip_content: 'Saltar al contenido',
         hero_name: 'Leonel Gallo',
         hero_alias: 'Tolei',
-        hero_subtitle: 'Analista de soporte técnico en Thomson Reuters — Bejerman y SQL Server.',
+        hero_subtitle: 'Analista de soporte técnico en Thomson Reuters. Bejerman, SQL Server y herramientas internas.',
         term_cmd1: 'whoami',
         term_out1: 'leonel.gallo · buenos aires',
         term_cmd2: 'stack --brief',
@@ -108,19 +109,19 @@ const translations = {
         chip_python: 'Python',
         about_eyebrow: '// perfil',
         about_title: 'Sobre mí',
-        about_p1: 'Me interesa resolver de raíz: dejar el sistema estable, el caso bien documentado y que quien lo retome no tenga que reconstruir todo desde cero.',
-        about_p2: 'En <strong>Thomson Reuters</strong> doy soporte técnico de <strong>Bejerman</strong> a empresas y estudios contables — instalaciones, SQL Server y consultas.',
-        about_p3: 'Para la mesa de ayuda armé <strong>ST2</strong> — <strong>S</strong>oluciones <strong>T</strong>ecnológicas: herramientas propias para que el agente trabaje más cómodo y consistente. Empezó como consola de mantenimiento; hoy es una suite: web (ex escritorio), kit SQL y la consola reescrita en <strong>PowerShell</strong>, con el resto en <strong>C# / .NET</strong>.',
+        about_p1: 'En soporte me importa cerrar el caso bien: sistema estable, nota clara, y que el que sigue no tenga que reconstruir el contexto desde cero.',
+        about_p2: 'En <strong>Thomson Reuters</strong> doy soporte técnico de <strong>Bejerman</strong> a empresas y estudios contables: instalaciones, SQL Server y el día a día de la mesa de ayuda.',
+        about_p3: 'Cuando algo se repite, lo automatizo. Así nació <strong>ST2</strong> — <strong>S</strong>oluciones <strong>T</strong>ecnológicas: una suite propia (web, SQL y PowerShell) para que el agente vaya más rápido y más parejo, en <strong>C# / .NET</strong>.',
         st2_disclaimer: 'Las herramientas ST2 no representan productos ni posiciones oficiales de Thomson Reuters.',
-        note_label: '// por qué ST2',
-        note_body: 'Cada módulo cerró algo repetitivo en soporte: chequeos de instalación a mano, backups lentos, textos de ticket distintos según quién atendía. Primero la consola (ahora PowerShell), después el escritorio — mutado a web — y el kit de SQL.',
+        note_label: '// cómo laburo',
+        note_body: 'Prefiero una herramienta chica que use todo el equipo a un procedimiento que vive en la cabeza de uno. ST2 salió de ahí: planillas, backups, diagnósticos de instalación.',
         exp_eyebrow: '// carrera',
         exp_title: 'Trayectoria',
         exp_present: 'hoy',
         exp_tr_title: 'Analista de Soporte Técnico',
-        exp_tr_b1: 'Soporte Bejerman a empresas y estudios contables.',
-        exp_tr_b2: 'SQL Server, instalación y configuración de sistemas.',
-        exp_tr_b3: 'Desarrollo de la suite ST2 (Soluciones Tecnológicas) para el flujo diario de soporte.',
+        exp_tr_b1: 'Soporte técnico de Bejerman a empresas y estudios contables: incidentes, instalaciones y consultas.',
+        exp_tr_b2: 'SQL Server en producción: bases, backups, scripts y trazas.',
+        exp_tr_b3: 'Diseño y mantenimiento de ST2, la suite que usa la mesa de ayuda día a día.',
         exp_9z_title: 'DBA & IT Support',
         exp_9z_b1: 'SQL y servidores para plataforma de gaming competitivo.',
         exp_9z_b2: 'Usuarios VIP, monitoreo y disponibilidad.',
@@ -133,28 +134,32 @@ const translations = {
         exp_brinks_b2: 'Validación de registros y conciliación de información.',
         projects_eyebrow: '// builds',
         projects_title: 'Proyectos',
-        projects_lead: 'Herramientas que uso en soporte. La suite <strong>ST2</strong> nació en la mesa de ayuda de TR para hacer el día a día más práctico para el agente.',
+        projects_lead: 'Lo que uso en la mesa — y un side project. <strong>ST2</strong> es una iniciativa personal de uso interno.',
         projects_disclaimer: 'Las herramientas ST2 no representan productos ni posiciones oficiales de Thomson Reuters.',
         group_st2: 'Suite ST2',
+        group_personal: 'Personal',
         link_live: 'st2.tolei.dev ↗',
         link_play: 'jugar ↗',
         proj_st2web_title: 'ST2 WEB',
         proj_st2web_badge: 'Versión actual',
-        proj_st2web_p1: 'App web de la mesa de ayuda: planillas automáticas (transferencia entre mesas, referral I+D y oportunidades), buscador del Portal Cliente, THOM y AI Platform integrados. Módulos internos con acceso por usuario. Nació como .exe de escritorio (WPF + WebView2 + SQLite); el ejecutable quedó discontinuado.',
+        proj_st2web_tag_sheets: 'Planillas',
+        proj_st2web_tag_portal: 'Portal',
+        proj_st2web_p1: 'Portal del agente en el navegador: planillas automáticas, búsqueda en el Portal Cliente, THOM y AI. Acceso por usuario. El .exe de escritorio quedó discontinuado.',
         proj_st2web_stack_prev: '· antes: WPF · WebView2 · SQLite',
         proj_st2web_prev_label: 'Antes: escritorio (.exe)',
         proj_sbbackup_badge_profiler: 'Profiler',
         proj_sbbackup_badge_schedule: 'Programado',
+        proj_sbbackup_badge_ai: 'IA',
         proj_sbbackup_title: 'ST2 — Herramientas SQL',
-        proj_sbbackup_p1: 'Mantenimiento para sistemas Bejerman: detección automática de bases por empresa, backup y restore con vista previa de metadatos, backups programados en el Programador de tareas de Windows, un ejecutor de scripts con consultas frecuentes y backup de seguridad antes de tocar datos, y una traza tipo Profiler (Extended Events) con errores en vivo. La IA explica scripts y errores en lenguaje simple, leyendo el esquema real de la base conectada.',
+        proj_sbbackup_p1: 'Backup, restore y scripts para bases Bejerman: detección por empresa, backups programados y traza tipo Profiler. La IA explica consultas y errores leyendo el esquema de la base conectada.',
         proj_st2bat_title: 'ST2.BAT — Mantenimiento Bejerman',
-        proj_st2bat_p1: 'El primer módulo de la suite, reescrito en PowerShell 5.1: consola de campo que arma la planilla técnica, registra componentes (DLL, Crystal, TLB, DCUBE) y diagnostica la instalación — compatibilidad, archivos renombrados, UPDATES vs Local, lentitud en RDP. Se entrega como .bat autoejecutable para usarla en el puesto sin instalar nada extra.',
+        proj_st2bat_p1: 'Consola de campo en PowerShell: planilla técnica, registro de componentes y diagnóstico de la instalación. Se abre como .bat en el puesto, sin instalar nada extra.',
         proj_game_title: 'Referral Runner',
         proj_game_badge: 'Personal',
         proj_game_p1: 'Runner en el navegador inspirado en el dino de Chrome, pero ambientado en la oficina: corrés por el pasillo esquivando mails, tickets y reuniones mientras sumás puntos. Proyecto personal con JavaScript y Canvas 2D.',
         contact_eyebrow: '// ping',
         contact_title: 'Contacto',
-        contact_subtitle: 'Consultas técnicas, colaboraciones en herramientas de soporte u oportunidades en IT.',
+        contact_subtitle: 'Si hay un caso, una herramienta o una oportunidad — escribime.',
         contact_email: 'Escribir por correo',
         cv_button: 'Descargar CV',
         footer_text: 'Tolei · Leonel Gallo · Buenos Aires'
@@ -165,9 +170,10 @@ const translations = {
         nav_experience: 'Career',
         nav_projects: 'Projects',
         nav_contact: 'Contact',
+        skip_content: 'Skip to content',
         hero_name: 'Leonel Gallo',
         hero_alias: 'Tolei',
-        hero_subtitle: 'Technical Support Analyst at Thomson Reuters — Bejerman and SQL Server.',
+        hero_subtitle: 'Technical Support Analyst at Thomson Reuters. Bejerman, SQL Server and internal tooling.',
         term_cmd1: 'whoami',
         term_out1: 'leonel.gallo · buenos aires',
         term_cmd2: 'stack --brief',
@@ -185,19 +191,19 @@ const translations = {
         chip_python: 'Python',
         about_eyebrow: '// profile',
         about_title: 'About me',
-        about_p1: 'I focus on fixing things properly: stable systems, well-documented cases, and no one having to rebuild context from scratch.',
-        about_p2: 'At <strong>Thomson Reuters</strong> I provide technical support for <strong>Bejerman</strong> to companies and accounting firms — installs, SQL Server and queries.',
-        about_p3: 'For the help desk I built <strong>ST2</strong> — <strong>T</strong>echnical <strong>S</strong>olutions: personal tools so agents can work more comfortably and consistently. Started as a maintenance console; today it is a suite: web (formerly desktop), a SQL kit, and the console rewritten in <strong>PowerShell</strong>, with the rest in <strong>C# / .NET</strong>.',
+        about_p1: 'In support I care about closing the case properly: a stable system, a clear note, and the next person not having to rebuild context from scratch.',
+        about_p2: 'At <strong>Thomson Reuters</strong> I provide technical support for <strong>Bejerman</strong> to companies and accounting firms: installs, SQL Server and day-to-day help-desk work.',
+        about_p3: 'When something repeats, I automate it. That is how <strong>ST2</strong> — <strong>T</strong>echnical <strong>S</strong>olutions — started: a personal suite (web, SQL and PowerShell) so agents move faster and more consistently, in <strong>C# / .NET</strong>.',
         st2_disclaimer: 'ST2 tools do not represent official Thomson Reuters products or positions.',
-        note_label: '// why ST2',
-        note_body: 'Each module closed something repetitive in support: manual install checks, slow backups, ticket text that varied by technician. First the console (now PowerShell), then the desktop app — mutated into web — and the SQL kit.',
+        note_label: '// how I work',
+        note_body: 'I would rather ship a small tool the whole team uses than a procedure that lives in one person\'s head. ST2 came from that: case sheets, backups, install diagnostics.',
         exp_eyebrow: '// career',
         exp_title: 'Career',
         exp_present: 'now',
         exp_tr_title: 'Technical Support Analyst',
-        exp_tr_b1: 'Bejerman support for companies and accounting firms.',
-        exp_tr_b2: 'SQL Server, system installation and configuration.',
-        exp_tr_b3: 'ST2 suite development (Technical Solutions) for daily support workflow.',
+        exp_tr_b1: 'Bejerman technical support for companies and accounting firms: incidents, installs and queries.',
+        exp_tr_b2: 'SQL Server in production: databases, backups, scripts and traces.',
+        exp_tr_b3: 'Design and upkeep of ST2, the suite the help desk uses every day.',
         exp_9z_title: 'DBA & IT Support',
         exp_9z_b1: 'SQL and servers for a competitive gaming platform.',
         exp_9z_b2: 'VIP users, monitoring and availability.',
@@ -210,28 +216,32 @@ const translations = {
         exp_brinks_b2: 'Record validation and information reconciliation.',
         projects_eyebrow: '// builds',
         projects_title: 'Projects',
-        projects_lead: 'Tools I use in support. The <strong>ST2</strong> suite was born on the TR help desk to make daily work more practical for agents.',
+        projects_lead: 'What I use on the desk — plus a side project. <strong>ST2</strong> is a personal internal initiative.',
         projects_disclaimer: 'ST2 tools do not represent official Thomson Reuters products or positions.',
         group_st2: 'ST2 Suite',
+        group_personal: 'Personal',
         link_live: 'st2.tolei.dev ↗',
         link_play: 'play ↗',
         proj_st2web_title: 'ST2 WEB',
         proj_st2web_badge: 'Current version',
-        proj_st2web_p1: 'Help-desk web app: automatic case sheets (desk-to-desk transfers, R&D referrals and sales opportunities), Portal Cliente search, plus embedded THOM and AI Platform. Per-user access for internal modules. Started as a desktop .exe (WPF + WebView2 + SQLite); the executable was discontinued.',
+        proj_st2web_tag_sheets: 'Case sheets',
+        proj_st2web_tag_portal: 'Portal',
+        proj_st2web_p1: 'Agent portal in the browser: automatic case sheets, Portal Cliente search, THOM and AI. Per-user access. The desktop .exe was discontinued.',
         proj_st2web_stack_prev: '· previously: WPF · WebView2 · SQLite',
         proj_st2web_prev_label: 'Before: desktop (.exe)',
         proj_sbbackup_badge_profiler: 'Profiler',
         proj_sbbackup_badge_schedule: 'Scheduled',
+        proj_sbbackup_badge_ai: 'AI',
         proj_sbbackup_title: 'ST2 — SQL Tools',
-        proj_sbbackup_p1: 'Maintenance for Bejerman systems: automatic per-company database detection, backup and restore with metadata preview, scheduled backups via Windows Task Scheduler, a SQL script runner with frequent queries and a safety backup before data changes, and a Profiler-style trace (Extended Events) that surfaces errors live. AI explains scripts and errors in plain language, reading the real schema of the connected database.',
+        proj_sbbackup_p1: 'Backup, restore and scripts for Bejerman databases: per-company detection, scheduled backups and a Profiler-style trace. AI explains queries and errors by reading the connected database schema.',
         proj_st2bat_title: 'ST2.BAT — Bejerman Maintenance',
-        proj_st2bat_p1: 'The first suite module, rewritten in PowerShell 5.1: a field console that builds the technical worksheet, registers components (DLL, Crystal, TLB, DCUBE) and diagnoses the install — compatibility, renamed files, UPDATES vs Local, RDP slowness. Shipped as a self-running .bat so it can be used at the workstation with nothing extra to install.',
+        proj_st2bat_p1: 'Field console in PowerShell: technical worksheet, component registration and install diagnostics. Opens as a .bat at the workstation, with nothing extra to install.',
         proj_game_title: 'Referral Runner',
         proj_game_badge: 'Personal',
         proj_game_p1: 'A browser runner inspired by Chrome\'s dino game, but set in the office: sprint down the hallway dodging emails, tickets and meetings while scoring points. Personal project built with JavaScript and Canvas 2D.',
         contact_eyebrow: '// ping',
         contact_title: 'Contact',
-        contact_subtitle: 'Technical consulting, support tooling collaborations or IT opportunities.',
+        contact_subtitle: 'A case, a tooling collab, or an IT opportunity — write me.',
         contact_email: 'Send an email',
         cv_button: 'Download CV',
         footer_text: 'Tolei · Leonel Gallo · Buenos Aires'
@@ -241,6 +251,7 @@ const translations = {
 let currentLang = 'es';
 
 const CV_FILES = { es: 'CV2026.pdf', en: 'CV2026_EN.pdf' };
+const LANG_KEY = 'tolei-portfolio-lang';
 
 function updateCvLinks(lang) {
     const file = CV_FILES[lang] || CV_FILES.es;
@@ -255,6 +266,7 @@ function applyTranslations(lang) {
     if (!dict) return;
     currentLang = lang;
     document.documentElement.lang = lang;
+    localStorage.setItem(LANG_KEY, lang);
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const value = dict[el.getAttribute('data-i18n')];
@@ -262,16 +274,29 @@ function applyTranslations(lang) {
     });
 
     updateCvLinks(lang);
+
+    const themeBtn = document.querySelector('.theme-toggle');
+    if (themeBtn) {
+        const theme = document.documentElement.getAttribute('data-theme') || 'light';
+        themeBtn.setAttribute(
+            'aria-label',
+            lang === 'en'
+                ? (theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode')
+                : (theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro')
+        );
+    }
 }
 
 const langToggle = document.querySelector('.lang-toggle');
 if (langToggle) {
+    const savedLang = localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'es';
     langToggle.addEventListener('click', () => {
         const next = currentLang === 'es' ? 'en' : 'es';
         langToggle.setAttribute('data-lang', next);
         applyTranslations(next);
     });
-    applyTranslations('es');
+    langToggle.setAttribute('data-lang', savedLang);
+    applyTranslations(savedLang);
 }
 
 /* ── Theme ── */
@@ -284,7 +309,9 @@ function applyTheme(theme) {
     if (metaTheme) metaTheme.setAttribute('content', theme === 'dark' ? '#0e0e0c' : '#f6f5f2');
     if (themeToggle) {
         themeToggle.setAttribute('data-theme', theme);
-        themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro');
+        themeToggle.setAttribute('aria-label', currentLang === 'en'
+            ? (theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode')
+            : (theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro'));
     }
     localStorage.setItem(THEME_KEY, theme);
 }

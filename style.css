@@ -53,6 +53,28 @@
     --shadow-float: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
+.skip-link {
+    position: absolute;
+    left: 12px;
+    top: -48px;
+    z-index: 200;
+    padding: 8px 14px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.skip-link:focus {
+    top: 12px;
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
