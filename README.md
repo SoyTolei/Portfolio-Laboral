@@ -12,7 +12,7 @@ Las herramientas ST2 son iniciativas personales y no representan productos ni po
 | --- | --- |
 | Perfil | Enfoque de trabajo y contexto en Thomson Reuters |
 | Trayectoria | Thomson Reuters, 9z · Globant, GMS, Brink's |
-| Proyectos | Suite ST2 (web, SQL, consola) y Referral Runner |
+| Proyectos | Suite ST2 ([WEB](https://github.com/SoyTolei/ST2-WEB), [SQL](https://github.com/SoyTolei/ST2-Herramientas-SQL), [BAT](https://github.com/SoyTolei/ST2-BAT)) y Referral Runner |
 | Contacto | Correo, LinkedIn, GitHub y CV (ES / EN) |
 
 ## Stack
