@@ -2,3 +2,10 @@
 .DS_Store
 Thumbs.db
 *.log
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+appsettings.local.json
+node_modules/
