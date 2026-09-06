@@ -27,8 +27,15 @@
                 <span class="brand-sub">cv</span>
             </a>
             <div class="cv-top-actions">
-                <a href="index.html" class="btn btn-ghost">← Portfolio</a>
-                <a class="btn btn-primary" href="assets/cv/leonel-gallo-2026.pdf" download="Leonel-Gallo-CV.pdf">Descargar PDF</a>
+                <div class="cv-lang" role="group" aria-label="Idioma del CV">
+                    <button type="button" class="cv-lang-btn is-active" data-cv-lang="es" aria-pressed="true">ES</button>
+                    <button type="button" class="cv-lang-btn" data-cv-lang="en" aria-pressed="false">EN</button>
+                </div>
+                <a href="index.html" class="btn btn-ghost" data-cv-back>← Portfolio</a>
+                <a class="btn btn-primary cv-download" href="assets/cv/leonel-gallo-2026.pdf" download="Leonel-Gallo-CV.pdf" data-cv-download>
+                    <span class="cv-download-icon" aria-hidden="true">↓</span>
+                    <span data-cv-download-label>Descargar CV</span>
+                </a>
             </div>
         </div>
     </header>
@@ -36,23 +43,156 @@
     <main class="cv-main">
         <div class="wrap">
             <header class="cv-head">
-                <p class="block-eyebrow">// curriculum</p>
+                <p class="block-eyebrow" data-cv-eyebrow>// curriculum</p>
                 <h1 class="cv-title">Leonel Gallo</h1>
-                <p class="cv-lead">Analista de soporte técnico · SQL Server · .NET</p>
+                <p class="cv-lead" data-cv-lead>Analista de soporte técnico · SQL Server · .NET</p>
             </header>
-            <div class="cv-stage">
-                <iframe
-                    class="cv-frame"
-                    src="assets/cv/leonel-gallo-2026.pdf#view=FitH"
-                    title="CV Leonel Gallo"
-                ></iframe>
+
+            <div class="cv-stage" aria-busy="true">
+                <div class="cv-loading" data-cv-loading>Cargando CV…</div>
+                <div class="cv-pages" id="cv-pages" hidden></div>
             </div>
-            <p class="cv-fallback">
-                Si no se ve el preview,
-                <a href="assets/cv/leonel-gallo-2026.pdf" target="_blank" rel="noopener">abrí el PDF</a>
-                o usá Descargar.
+
+            <p class="cv-fallback" data-cv-fallback hidden>
+                <span data-cv-fallback-text>No se pudo mostrar el preview.</span>
+                <a href="assets/cv/leonel-gallo-2026.pdf" data-cv-open target="_blank" rel="noopener">Abrí el PDF</a>
+                <span data-cv-fallback-or> o descargalo con el botón de arriba.</span>
             </p>
         </div>
     </main>
+
+    <script type="module">
+        const FILES = {
+            es: {
+                pdf: 'assets/cv/leonel-gallo-2026.pdf',
+                downloadName: 'Leonel-Gallo-CV.pdf',
+                title: 'CV — Leonel Gallo | Tolei',
+                eyebrow: '// curriculum',
+                lead: 'Analista de soporte técnico · SQL Server · .NET',
+                download: 'Descargar CV',
+                loading: 'Cargando CV…',
+                fallback: 'No se pudo mostrar el preview.',
+                open: 'Abrí el PDF',
+                fallbackOr: ' o descargalo con el botón de arriba.',
+                back: '← Portfolio',
+                lang: 'es'
+            },
+            en: {
+                pdf: 'assets/cv/leonel-gallo-2026-en.pdf',
+                downloadName: 'Leonel-Gallo-CV-EN.pdf',
+                title: 'Resume — Leonel Gallo | Tolei',
+                eyebrow: '// resume',
+                lead: 'Technical support analyst · SQL Server · .NET',
+                download: 'Download CV',
+                loading: 'Loading resume…',
+                fallback: 'Could not show the preview.',
+                open: 'Open the PDF',
+                fallbackOr: ' or use the download button above.',
+                back: '← Portfolio',
+                lang: 'en'
+            }
+        };
+
+        const params = new URLSearchParams(location.search);
+        let current = (params.get('lang') === 'en' || location.pathname.includes('cv-en')) ? 'en' : 'es';
+
+        const pagesEl = document.getElementById('cv-pages');
+        const stageEl = document.querySelector('.cv-stage');
+        const loadingEl = document.querySelector('[data-cv-loading]');
+        const fallbackEl = document.querySelector('[data-cv-fallback]');
+        const downloadEl = document.querySelector('[data-cv-download]');
+        const downloadLabel = document.querySelector('[data-cv-download-label]');
+        const openEl = document.querySelector('[data-cv-open]');
+        const backEl = document.querySelector('[data-cv-back]');
+
+        function setUi(lang) {
+            const t = FILES[lang];
+            document.documentElement.lang = t.lang;
+            document.title = t.title;
+            document.querySelector('[data-cv-eyebrow]').textContent = t.eyebrow;
+            document.querySelector('[data-cv-lead]').textContent = t.lead;
+            downloadLabel.textContent = t.download;
+            downloadEl.setAttribute('href', t.pdf);
+            downloadEl.setAttribute('download', t.downloadName);
+            openEl.setAttribute('href', t.pdf);
+            openEl.textContent = t.open;
+            document.querySelector('[data-cv-fallback-text]').textContent = t.fallback;
+            document.querySelector('[data-cv-fallback-or]').textContent = t.fallbackOr;
+            backEl.textContent = t.back;
+            loadingEl.textContent = t.loading;
+            document.querySelectorAll('.cv-lang-btn').forEach(btn => {
+                const active = btn.getAttribute('data-cv-lang') === lang;
+                btn.classList.toggle('is-active', active);
+                btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+            const url = new URL(location.href);
+            if (lang === 'en') url.searchParams.set('lang', 'en');
+            else url.searchParams.delete('lang');
+            history.replaceState({}, '', url.pathname + url.search);
+        }
+
+        async function renderPdf(lang) {
+            const t = FILES[lang];
+            stageEl.setAttribute('aria-busy', 'true');
+            loadingEl.hidden = false;
+            pagesEl.hidden = true;
+            pagesEl.innerHTML = '';
+            fallbackEl.hidden = true;
+
+            try {
+                const pdfjs = await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs');
+                pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+
+                const doc = await pdfjs.getDocument(t.pdf).promise;
+                const maxWidth = Math.min(pagesEl.parentElement.clientWidth - 2, 900);
+
+                for (let n = 1; n <= doc.numPages; n++) {
+                    const page = await doc.getPage(n);
+                    const unscaled = page.getViewport({ scale: 1 });
+                    const scale = maxWidth / unscaled.width;
+                    const viewport = page.getViewport({ scale: Math.min(scale, 2.2) });
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d', { alpha: false });
+                    canvas.width = Math.floor(viewport.width);
+                    canvas.height = Math.floor(viewport.height);
+                    canvas.className = 'cv-page-canvas';
+                    canvas.setAttribute('aria-label', `Página ${n} de ${doc.numPages}`);
+                    await page.render({ canvasContext: ctx, viewport }).promise;
+                    pagesEl.appendChild(canvas);
+                }
+
+                loadingEl.hidden = true;
+                pagesEl.hidden = false;
+                stageEl.setAttribute('aria-busy', 'false');
+            } catch (err) {
+                console.error(err);
+                loadingEl.hidden = true;
+                fallbackEl.hidden = false;
+                stageEl.setAttribute('aria-busy', 'false');
+            }
+        }
+
+        async function switchLang(lang) {
+            current = lang;
+            setUi(lang);
+            await renderPdf(lang);
+        }
+
+        document.querySelectorAll('.cv-lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-cv-lang');
+                if (lang !== current) switchLang(lang);
+            });
+        });
+
+        setUi(current);
+        renderPdf(current);
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => renderPdf(current), 250);
+        });
+    </script>
 </body>
 </html>

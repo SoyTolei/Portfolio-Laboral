@@ -1581,15 +1581,77 @@ a { color: inherit; }
     background: var(--surface);
     box-shadow: var(--shadow-lg);
     overflow: hidden;
-    min-height: min(78vh, 980px);
+    min-height: 240px;
 }
 
 .cv-frame {
+    display: none;
+}
+
+.cv-loading {
+    padding: 48px 20px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.cv-pages {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    background: color-mix(in srgb, var(--bg-alt) 80%, var(--ink));
+}
+
+.cv-page-canvas {
     display: block;
     width: 100%;
-    height: min(78vh, 980px);
+    height: auto;
+    margin-inline: auto;
+    border: var(--stroke) solid var(--ink);
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+}
+
+.cv-lang {
+    display: inline-flex;
+    border: var(--stroke) solid var(--ink);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    background: var(--surface);
+}
+
+.cv-lang-btn {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 8px 12px;
     border: 0;
-    background: #111;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.cv-lang-btn + .cv-lang-btn {
+    border-left: var(--stroke) solid var(--ink);
+}
+
+.cv-lang-btn.is-active {
+    background: color-mix(in srgb, var(--surface) 70%, var(--accent) 30%);
+    color: var(--accent);
+}
+
+.cv-download {
+    gap: 8px;
+}
+
+.cv-download-icon {
+    font-size: 1rem;
+    line-height: 1;
 }
 
 .cv-fallback {
@@ -1619,19 +1681,20 @@ a { color: inherit; }
         justify-content: center;
     }
 
-    .cv-stage,
-    .cv-frame {
-        min-height: 70vh;
-        height: 70vh;
+    .cv-pages {
+        padding: 10px;
+        gap: 12px;
     }
 }
 
 @media print {
     .cv-top,
     .cv-head,
-    .cv-fallback { display: none !important; }
+    .cv-fallback,
+    .cv-loading { display: none !important; }
 
     .cv-main { padding: 0; }
     .cv-stage { border: 0; box-shadow: none; }
-    .cv-frame { height: 100vh; }
+    .cv-pages { padding: 0; gap: 0; background: #fff; }
+    .cv-page-canvas { border: 0; box-shadow: none; break-after: page; }
 }

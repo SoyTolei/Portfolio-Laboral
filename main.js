@@ -264,7 +264,7 @@ const CV_FILES = {
 };
 const CV_PAGES = {
     es: 'cv.html',
-    en: 'cv-en.html'
+    en: 'cv.html?lang=en'
 };
 const LANG_KEY = 'tolei-portfolio-lang';
 
