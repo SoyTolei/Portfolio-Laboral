@@ -35,6 +35,7 @@ html[data-theme="light"] { color-scheme: light; }
     --shadow-lg: 6px 6px 0 var(--shadow-ink);
     --shadow-accent: 2px 2px 0 var(--shadow-ink);
     --shadow-float: 0 12px 36px rgba(243, 92, 25, 0.28);
+    --grid-line: color-mix(in srgb, var(--border-soft) 28%, transparent);
 }
 
 [data-theme="light"] {
@@ -59,6 +60,7 @@ html[data-theme="light"] { color-scheme: light; }
     --shadow-lg: 5px 5px 0 var(--shadow-ink);
     --shadow-accent: 4px 4px 0 color-mix(in srgb, var(--accent) 50%, var(--ink));
     --shadow-float: 0 12px 40px rgba(0, 0, 0, 0.35);
+    --grid-line: color-mix(in srgb, var(--border-soft) 14%, transparent);
 }
 
 .skip-link {
@@ -97,8 +99,8 @@ body {
     color: var(--text);
     background-color: var(--bg);
     background-image:
-        linear-gradient(color-mix(in srgb, var(--border-soft) 28%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--border-soft) 28%, transparent) 1px, transparent 1px);
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 32px 32px;
     -webkit-font-smoothing: antialiased;
 }
@@ -626,12 +628,10 @@ a { color: inherit; }
     box-shadow: var(--shadow-accent);
 }
 
-.chip:nth-child(1) { top: 4%; left: 50%; transform: translateX(-50%); animation-name: chip-float-center; }
-.chip:nth-child(2) { top: 32%; right: 0; animation-delay: 0.7s; }
-.chip:nth-child(3) { bottom: 14%; right: 6%; animation-delay: 1.4s; }
-.chip:nth-child(4) { bottom: 14%; left: 6%; animation-delay: 2.1s; }
-.chip:nth-child(5) { top: 32%; left: 0; animation-delay: 2.8s; }
-.chip:nth-child(6) { bottom: 2%; left: 50%; transform: translateX(-50%); animation-delay: 3.5s; animation-name: chip-float-center; }
+.chip:nth-child(1) { top: 6%; left: 50%; transform: translateX(-50%); animation-name: chip-float-center; }
+.chip:nth-child(2) { top: 38%; right: 0; animation-delay: 0.7s; }
+.chip:nth-child(3) { bottom: 10%; left: 50%; transform: translateX(-50%); animation-delay: 1.4s; animation-name: chip-float-center; }
+.chip:nth-child(4) { top: 38%; left: 0; animation-delay: 2.1s; }
 
 @keyframes chip-float {
     0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -666,6 +666,22 @@ a { color: inherit; }
 /* ── Blocks ── */
 .block {
     padding: 72px 0;
+}
+
+#about.block {
+    padding: 64px 0 80px;
+}
+
+#experience.block {
+    padding: 88px 0;
+}
+
+#projects.block {
+    padding: 96px 0 88px;
+}
+
+#contact.block {
+    padding: 80px 0 96px;
 }
 
 .block--alt {
@@ -1045,9 +1061,9 @@ a { color: inherit; }
 
 .work-item {
     display: grid;
-    grid-template-columns: 1fr 180px;
-    gap: 20px;
-    padding: 20px 22px;
+    grid-template-columns: 1fr minmax(220px, 280px);
+    gap: 24px;
+    padding: 22px 24px;
     background: var(--surface);
     border: var(--stroke) solid var(--ink);
     border-radius: var(--radius);
@@ -1063,8 +1079,8 @@ a { color: inherit; }
 }
 
 .work-item--featured {
-    grid-template-columns: 1fr 180px;
-    padding: 22px 20px;
+    grid-template-columns: 1fr minmax(220px, 280px);
+    padding: 24px 24px;
 }
 
 .work-item--compact {
@@ -1439,7 +1455,7 @@ a { color: inherit; }
     }
 
     .work-thumb {
-        max-width: 280px;
+        max-width: 320px;
         justify-self: end;
     }
 
@@ -1482,6 +1498,13 @@ a { color: inherit; }
     }
 
     .block { padding: 56px 0; }
+
+    #about.block,
+    #experience.block,
+    #projects.block,
+    #contact.block {
+        padding: 56px 0;
+    }
 
     .hero { padding: 80px 0 48px; }
 }
