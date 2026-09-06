@@ -525,16 +525,16 @@ a { color: inherit; }
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 400px;
+    min-height: 320px;
     width: 100%;
-    max-width: 420px;
+    max-width: 340px;
     margin-inline: auto;
     overflow: visible;
 }
 
 .avatar-ring {
-    width: min(300px, 62vw);
-    height: min(300px, 62vw);
+    width: min(232px, 50vw);
+    height: min(232px, 50vw);
     border-radius: 50%;
     padding: 4px;
     background: var(--accent);
@@ -544,6 +544,28 @@ a { color: inherit; }
     flex-shrink: 0;
     box-shadow: var(--shadow-lg);
     transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.avatar-clip {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #121212;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    transform: scale(1.62);
+    transform-origin: center 55%;
 }
 
 .avatar-ring::before {
@@ -574,23 +596,6 @@ a { color: inherit; }
 
 [data-theme="light"] .hero-visual:hover .avatar-ring {
     box-shadow: 8px 8px 0 var(--shadow-ink);
-}
-
-.avatar-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: contain;
-    object-position: center center;
-    display: block;
-    background: #121212;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    padding: 2% 1% 0;
-    box-sizing: border-box;
-    transform: scale(1.12);
-    transform-origin: center center;
 }
 
 .hero-chips {
@@ -1445,8 +1450,7 @@ a { color: inherit; }
 
     .hero-visual {
         order: -1;
-        min-height: 300px;
-        max-width: 340px;
+        min-height: 250px;
     }
 
     .hero-chips { display: none; }
