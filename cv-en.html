@@ -146,13 +146,58 @@
 
         @media print {
             body { background: #fff; }
+            .cv-bar { display: none !important; }
             .page { margin: 0; width: auto; min-height: auto; }
         }
 
         @page { size: A4; margin: 0; }
+
+        .cv-bar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: #1a1a1a;
+            color: #f5f5f5;
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 13px;
+        }
+
+        .cv-bar a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .cv-bar a:hover { color: var(--accent); }
+
+        .cv-bar__download {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 1.5px solid #f5f5f5;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .cv-bar__download:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
+    <div class="cv-bar">
+        <a href="index.html">← Portfolio</a>
+        <a class="cv-bar__download" href="CV2026_EN.pdf" download="CV2026_EN.pdf">Download PDF</a>
+    </div>
     <div class="page">
         <aside class="sidebar">
             <h1>Leonel Gallo</h1>

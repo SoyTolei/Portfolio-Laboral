@@ -83,7 +83,7 @@
                     </div>
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary" data-i18n="hero_cta_projects">Ver proyectos</a>
-                        <a href="CV2026.pdf" class="btn btn-ghost" download data-cv-link data-i18n="hero_cta_cv">CV</a>
+                        <a href="cv.html" class="btn btn-ghost" data-cv-page data-i18n="hero_cta_cv">Ver CV</a>
                     </div>
                 </div>
                 <div class="hero-visual" aria-hidden="false">
@@ -303,22 +303,25 @@
         </section>
 
         <section id="contact" class="block block--alt">
-            <div class="wrap contact-wrap">
+            <div class="wrap">
                 <header class="block-head">
                     <p class="block-eyebrow" data-i18n="contact_eyebrow">// contacto</p>
                     <h2 class="block-title" data-i18n="contact_title">Contacto</h2>
                     <p class="block-lead" data-i18n="contact_subtitle">Consultas técnicas, herramientas de soporte u oportunidades en IT.</p>
                 </header>
-                <div class="contact-panel">
-                    <a href="mailto:leord.gallo@gmail.com" class="contact-primary">
-                        <span class="contact-icon" aria-hidden="true">✉</span>
-                        <span data-i18n="contact_email">Escribir por correo</span>
+                <div class="contact-grid">
+                    <a class="contact-tile contact-tile--accent" href="mailto:leord.gallo@gmail.com">
+                        <span class="contact-kicker" data-i18n="contact_email_label">email</span>
+                        <span class="contact-value">leord.gallo@gmail.com</span>
                     </a>
-                    <ul class="contact-channels">
-                        <li><a href="https://www.linkedin.com/in/l-gallo/" target="_blank" rel="noopener noreferrer"><span class="contact-icon" aria-hidden="true">in</span><span>LinkedIn</span></a></li>
-                        <li><a href="https://github.com/soytolei" target="_blank" rel="noopener noreferrer"><span class="contact-icon" aria-hidden="true">gh</span><span>GitHub @soytolei</span></a></li>
-                        <li><a href="CV2026.pdf" download data-cv-link><span class="contact-icon" aria-hidden="true">↓</span><span data-i18n="cv_button">Descargar CV</span></a></li>
-                    </ul>
+                    <a class="contact-tile" href="https://www.linkedin.com/in/l-gallo/" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-kicker">linkedin</span>
+                        <span class="contact-value">/in/l-gallo</span>
+                    </a>
+                    <a class="contact-tile" href="https://github.com/soytolei" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-kicker">github</span>
+                        <span class="contact-value">@soytolei</span>
+                    </a>
                 </div>
             </div>
         </section>

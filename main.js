@@ -99,7 +99,7 @@ const translations = {
         term_cmd3: 'st2 status',
         term_out3: '3 módulos activos · web · sql · powershell',
         hero_cta_projects: 'Ver proyectos',
-        hero_cta_cv: 'CV',
+        hero_cta_cv: 'Ver CV',
         chip_sql: 'SQL Server',
         chip_dotnet: '.NET',
         chip_csharp: 'C#',
@@ -164,8 +164,7 @@ const translations = {
         contact_eyebrow: '// contacto',
         contact_title: 'Contacto',
         contact_subtitle: 'Consultas técnicas, herramientas de soporte u oportunidades en IT.',
-        contact_email: 'Escribir por correo',
-        cv_button: 'Descargar CV',
+        contact_email_label: 'email',
         footer_text: 'Tolei · Leonel Gallo · Buenos Aires'
     },
     en: {
@@ -185,7 +184,7 @@ const translations = {
         term_cmd3: 'st2 status',
         term_out3: '3 active modules · web · sql · powershell',
         hero_cta_projects: 'View projects',
-        hero_cta_cv: 'CV',
+        hero_cta_cv: 'View CV',
         chip_sql: 'SQL Server',
         chip_dotnet: '.NET',
         chip_csharp: 'C#',
@@ -250,8 +249,7 @@ const translations = {
         contact_eyebrow: '// contact',
         contact_title: 'Contact',
         contact_subtitle: 'Technical queries, support tooling or IT opportunities.',
-        contact_email: 'Send an email',
-        cv_button: 'Download CV',
+        contact_email_label: 'email',
         footer_text: 'Tolei · Leonel Gallo · Buenos Aires'
     }
 };
@@ -259,13 +257,19 @@ const translations = {
 let currentLang = 'es';
 
 const CV_FILES = { es: 'CV2026.pdf', en: 'CV2026_EN.pdf' };
+const CV_PAGES = { es: 'cv.html', en: 'cv-en.html' };
 const LANG_KEY = 'tolei-portfolio-lang';
 
 function updateCvLinks(lang) {
     const file = CV_FILES[lang] || CV_FILES.es;
+    const page = CV_PAGES[lang] || CV_PAGES.es;
     document.querySelectorAll('[data-cv-link]').forEach(el => {
         el.setAttribute('href', file);
         el.setAttribute('download', file);
+    });
+    document.querySelectorAll('[data-cv-page]').forEach(el => {
+        el.setAttribute('href', page);
+        el.removeAttribute('download');
     });
 }
 
