@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <title>Leonel Gallo — CV</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <style>
@@ -10,7 +11,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: system-ui, sans-serif;
-            background: #e8e8e8;
+            background: #111;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -48,17 +49,8 @@
             width: 100%;
             border: 0;
             min-height: calc(100vh - 52px);
-            background: #e8e8e8;
+            background: #222;
         }
-        .cv-fallback {
-            display: none;
-            max-width: 640px;
-            margin: 48px auto;
-            padding: 24px;
-            text-align: center;
-            color: #333;
-        }
-        .cv-fallback a { color: var(--accent); font-weight: 600; }
         @media print {
             .cv-bar { display: none !important; }
             .cv-frame { min-height: 100vh; }
@@ -68,9 +60,8 @@
 <body>
     <div class="cv-bar">
         <a href="index.html">← Portfolio</a>
-        <a class="cv-bar__download" href="CV2026.pdf" download="CV2026.pdf">Descargar PDF</a>
+        <a class="cv-bar__download" href="assets/cv/leonel-gallo-2026.pdf" download="Leonel-Gallo-CV.pdf">Descargar PDF</a>
     </div>
-    <iframe class="cv-frame" src="CV2026.pdf" title="CV Leonel Gallo"></iframe>
-    <p class="cv-fallback">Si el PDF no se muestra, <a href="CV2026.pdf" target="_blank" rel="noopener">abrilo acá</a>.</p>
+    <iframe class="cv-frame" src="assets/cv/leonel-gallo-2026.pdf#toolbar=1" title="CV Leonel Gallo"></iframe>
 </body>
 </html>

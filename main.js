@@ -165,6 +165,7 @@ const translations = {
         contact_title: 'Contacto',
         contact_subtitle: 'Consultas técnicas, herramientas de soporte u oportunidades en IT.',
         contact_email_label: 'email',
+        contact_email_value: '@gmail',
         footer_text: 'Tolei · Leonel Gallo · Buenos Aires'
     },
     en: {
@@ -250,13 +251,17 @@ const translations = {
         contact_title: 'Contact',
         contact_subtitle: 'Technical queries, support tooling or IT opportunities.',
         contact_email_label: 'email',
+        contact_email_value: '@gmail',
         footer_text: 'Tolei · Leonel Gallo · Buenos Aires'
     }
 };
 
 let currentLang = 'es';
 
-const CV_FILES = { es: 'CV2026.pdf', en: 'CV2026_EN.pdf' };
+const CV_FILES = {
+    es: 'assets/cv/leonel-gallo-2026.pdf',
+    en: 'assets/cv/leonel-gallo-2026-en.pdf'
+};
 const CV_PAGES = { es: 'cv.html', en: 'cv-en.html' };
 const LANG_KEY = 'tolei-portfolio-lang';
 
@@ -265,7 +270,7 @@ function updateCvLinks(lang) {
     const page = CV_PAGES[lang] || CV_PAGES.es;
     document.querySelectorAll('[data-cv-link]').forEach(el => {
         el.setAttribute('href', file);
-        el.setAttribute('download', file);
+        el.setAttribute('download', lang === 'en' ? 'Leonel-Gallo-CV-EN.pdf' : 'Leonel-Gallo-CV.pdf');
     });
     document.querySelectorAll('[data-cv-page]').forEach(el => {
         el.setAttribute('href', page);
@@ -289,7 +294,7 @@ function applyTranslations(lang) {
 
     const themeBtn = document.querySelector('.theme-toggle');
     if (themeBtn) {
-        const theme = document.documentElement.getAttribute('data-theme') || 'light';
+        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
         themeBtn.setAttribute(
             'aria-label',
             lang === 'en'
@@ -330,10 +335,10 @@ function applyTheme(theme) {
 
 if (themeToggle) {
     const saved = localStorage.getItem(THEME_KEY);
-    applyTheme(saved || 'light');
+    applyTheme(saved || 'dark');
 
     themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
         applyTheme(current === 'dark' ? 'light' : 'dark');
     });
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,11 +18,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#f6f5f2">
+    <meta name="theme-color" content="#0e0e0c">
     <link rel="stylesheet" href="style.css">
     <script>
         (function () {
-            var theme = localStorage.getItem('tolei-portfolio-theme') || 'light';
+            var theme = localStorage.getItem('tolei-portfolio-theme') || 'dark';
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
@@ -46,7 +46,7 @@
                     <a href="#contact" class="nav-link" data-i18n="nav_contact">Contacto</a>
                 </nav>
                 <div class="header-utils">
-                    <button class="util-btn theme-toggle" type="button" aria-label="Activar modo oscuro" data-theme="light">
+                    <button class="util-btn theme-toggle" type="button" aria-label="Activar modo claro" data-theme="dark">
                         <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
                         <span class="theme-icon theme-icon-moon" aria-hidden="true">☽</span>
                     </button>
@@ -312,7 +312,7 @@
                 <div class="contact-grid">
                     <a class="contact-tile contact-tile--accent" href="mailto:leord.gallo@gmail.com">
                         <span class="contact-kicker" data-i18n="contact_email_label">email</span>
-                        <span class="contact-value">leord.gallo@gmail.com</span>
+                        <span class="contact-value" data-i18n="contact_email_value">@gmail</span>
                     </a>
                     <a class="contact-tile" href="https://www.linkedin.com/in/l-gallo/" target="_blank" rel="noopener noreferrer">
                         <span class="contact-kicker">linkedin</span>
