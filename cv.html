@@ -26,28 +26,26 @@
                 <span class="brand-mark">tolei</span>
                 <span class="brand-sub">cv</span>
             </a>
-            <div class="cv-top-actions">
-                <div class="cv-lang" role="group" aria-label="Idioma del CV">
-                    <button type="button" class="cv-lang-btn is-active" data-cv-lang="es" aria-pressed="true">ES</button>
-                    <button type="button" class="cv-lang-btn" data-cv-lang="en" aria-pressed="false">EN</button>
-                </div>
-                <button class="util-btn theme-toggle" type="button" aria-label="Cambiar tema" data-theme="dark">
-                    <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
-                    <span class="theme-icon theme-icon-moon" aria-hidden="true">☽</span>
-                </button>
-                <a href="index.html" class="btn btn-ghost" data-cv-back>← Portfolio</a>
-                <a class="btn btn-primary cv-download" href="#" download data-cv-download>
-                    <span class="cv-download-icon" aria-hidden="true">↓</span>
-                    <span data-cv-download-label>Descargar CV</span>
-                </a>
-            </div>
+            <a href="index.html" class="btn btn-ghost" data-cv-back>← Volver al portfolio</a>
         </div>
     </header>
 
     <main class="cv-main">
         <div class="wrap">
             <header class="cv-head">
-                <p class="block-eyebrow" data-cv-eyebrow>// curriculum</p>
+                <div class="cv-head-top">
+                    <p class="block-eyebrow" data-cv-eyebrow>// curriculum</p>
+                    <div class="cv-head-actions">
+                        <div class="cv-lang" role="group" aria-label="Idioma del CV">
+                            <button type="button" class="cv-lang-btn is-active" data-cv-lang="es" aria-pressed="true">ES</button>
+                            <button type="button" class="cv-lang-btn" data-cv-lang="en" aria-pressed="false">EN</button>
+                        </div>
+                        <a class="btn btn-primary cv-download" href="#" download data-cv-download>
+                            <span class="cv-download-icon" aria-hidden="true">↓</span>
+                            <span data-cv-download-label>Descargar CV</span>
+                        </a>
+                    </div>
+                </div>
                 <h1 class="cv-title">Leonel Gallo</h1>
                 <p class="cv-lead" data-cv-lead>Analista de soporte técnico · SQL Server · .NET</p>
             </header>
@@ -79,7 +77,7 @@
                 fallback: 'No se pudo mostrar el preview.',
                 open: 'Abrí el PDF',
                 fallbackOr: ' o descargalo con el botón de arriba.',
-                back: '← Portfolio',
+                back: '← Volver al portfolio',
                 lang: 'es',
                 downloadName: {
                     light: 'Leonel-Gallo-CV.pdf',
@@ -99,7 +97,7 @@
                 fallback: 'Could not show the preview.',
                 open: 'Open the PDF',
                 fallbackOr: ' or use the download button above.',
-                back: '← Portfolio',
+                back: '← Back to portfolio',
                 lang: 'en',
                 downloadName: {
                     light: 'Leonel-Gallo-CV-EN.pdf',
@@ -126,24 +124,13 @@
         const downloadLabel = document.querySelector('[data-cv-download-label]');
         const openEl = document.querySelector('[data-cv-open]');
         const backEl = document.querySelector('[data-cv-back]');
-        const themeBtn = document.querySelector('.theme-toggle');
 
         function getTheme() {
             return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
         }
 
-        function applyTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem(THEME_KEY, theme);
-            if (themeBtn) {
-                themeBtn.setAttribute('data-theme', theme);
-                themeBtn.setAttribute(
-                    'aria-label',
-                    currentLang === 'en'
-                        ? (theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode')
-                        : (theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro')
-                );
-            }
+        function syncThemeMeta() {
+            const theme = getTheme();
             const meta = document.querySelector('meta[name="theme-color"]');
             if (meta) meta.setAttribute('content', theme === 'dark' ? '#0e0e0c' : '#f6f5f2');
         }
@@ -185,7 +172,7 @@
             if (currentLang === 'en') url.searchParams.set('lang', 'en');
             else url.searchParams.delete('lang');
             history.replaceState({}, '', url.pathname + url.search);
-            applyTheme(getTheme());
+            syncThemeMeta();
         }
 
         async function ensurePdfjs() {
@@ -197,7 +184,6 @@
 
         async function renderPdf() {
             const token = ++renderToken;
-            const t = COPY[currentLang];
             const file = currentPdf();
 
             stageEl.setAttribute('aria-busy', 'true');
@@ -240,7 +226,6 @@
                     canvas.className = 'cv-page-canvas';
                     canvas.setAttribute('aria-label', `${currentLang === 'en' ? 'Page' : 'Página'} ${n} / ${doc.numPages}`);
                     ctx.setTransform(outputScale, 0, 0, outputScale, 0, 0);
-                    // page fill matching document theme
                     ctx.fillStyle = file.theme === 'dark' ? '#121212' : '#ffffff';
                     ctx.fillRect(0, 0, viewport.width, viewport.height);
                     await page.render({
@@ -278,14 +263,9 @@
             });
         });
 
-        if (themeBtn) {
-            themeBtn.addEventListener('click', () => {
-                applyTheme(getTheme() === 'dark' ? 'light' : 'dark');
-                refresh();
-            });
-        }
-
-        applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+        const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        syncThemeMeta();
         refresh();
 
         let resizeTimer;
