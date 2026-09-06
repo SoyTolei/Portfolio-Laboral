@@ -552,8 +552,14 @@ a { color: inherit; }
     height: 100%;
     border-radius: 50%;
     overflow: hidden;
-    background: #121212;
+    background: #0a0a0a;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    transition: background 0.25s ease;
+}
+
+[data-theme="light"] .avatar-clip {
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
 }
 
 .avatar-img {
@@ -562,11 +568,9 @@ a { color: inherit; }
     object-fit: contain;
     object-position: center center;
     display: block;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    transform: scale(1.62);
+    image-rendering: auto;
+    transform: scale(1.55);
     transform-origin: center 55%;
-    filter: contrast(1.06) saturate(0.92);
 }
 
 .avatar-ring::before {
