@@ -571,6 +571,11 @@ a { color: inherit; }
     image-rendering: auto;
     transform: scale(1.55);
     transform-origin: center 55%;
+    background: #0a0a0a;
+}
+
+[data-theme="light"] .avatar-img {
+    background: #ffffff;
 }
 
 .avatar-ring::before {
