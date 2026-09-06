@@ -566,6 +566,7 @@ a { color: inherit; }
     image-rendering: crisp-edges;
     transform: scale(1.62);
     transform-origin: center 55%;
+    filter: contrast(1.06) saturate(0.92);
 }
 
 .avatar-ring::before {
