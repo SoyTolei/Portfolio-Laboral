@@ -1643,6 +1643,7 @@ a { color: inherit; }
     border: var(--stroke) solid var(--ink);
     border-radius: 4px;
     box-shadow: var(--shadow-sm);
+    background: #fff;
 }
 
 .cv-stage--dark-doc .cv-page-canvas {

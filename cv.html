@@ -50,33 +50,19 @@
                 <p class="cv-lead" data-cv-lead>Analista de soporte técnico · SQL Server · .NET</p>
             </header>
 
-            <div class="cv-stage" aria-busy="true">
-                <div class="cv-loading" data-cv-loading>Cargando CV…</div>
-                <div class="cv-pages" id="cv-pages" hidden></div>
+            <div class="cv-stage" aria-busy="false">
+                <div class="cv-pages" id="cv-pages"></div>
             </div>
-
-            <p class="cv-fallback" data-cv-fallback hidden>
-                <span data-cv-fallback-text>No se pudo mostrar el preview.</span>
-                <a href="#" data-cv-open target="_blank" rel="noopener">Abrí el PDF</a>
-                <span data-cv-fallback-or> o descargalo con el botón de arriba.</span>
-            </p>
         </div>
     </main>
 
-    <script type="module">
-        const PDFJS_VER = '4.10.38';
-        const PDFJS_BASE = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${PDFJS_VER}`;
-
+    <script>
         const COPY = {
             es: {
                 title: 'CV — Leonel Gallo | Tolei',
                 eyebrow: '// curriculum',
                 lead: 'Analista de soporte técnico · SQL Server · .NET',
                 download: 'Descargar CV',
-                loading: 'Cargando CV…',
-                fallback: 'No se pudo mostrar el preview.',
-                open: 'Abrí el PDF',
-                fallbackOr: ' o descargalo con el botón de arriba.',
                 back: '← Volver al portfolio',
                 lang: 'es',
                 downloadName: {
@@ -86,6 +72,10 @@
                 pdf: {
                     light: 'assets/cv/leonel-gallo-2026.pdf',
                     dark: 'assets/cv/Leonel_Gallo_CV_Dark.pdf'
+                },
+                preview: {
+                    light: ['assets/cv/preview/es-light-1.png', 'assets/cv/preview/es-light-2.png'],
+                    dark: ['assets/cv/preview/es-dark-1.png', 'assets/cv/preview/es-dark-2.png']
                 }
             },
             en: {
@@ -93,10 +83,6 @@
                 eyebrow: '// resume',
                 lead: 'Technical support analyst · SQL Server · .NET',
                 download: 'Download CV',
-                loading: 'Loading resume…',
-                fallback: 'Could not show the preview.',
-                open: 'Open the PDF',
-                fallbackOr: ' or use the download button above.',
                 back: '← Back to portfolio',
                 lang: 'en',
                 downloadName: {
@@ -106,61 +92,50 @@
                 pdf: {
                     light: 'assets/cv/leonel-gallo-2026-en.pdf',
                     dark: 'assets/cv/Leonel_Gallo_CV_EN_Dark.pdf'
+                },
+                preview: {
+                    light: ['assets/cv/preview/en-light-1.png', 'assets/cv/preview/en-light-2.png'],
+                    dark: ['assets/cv/preview/en-dark-1.png', 'assets/cv/preview/en-dark-2.png']
                 }
             }
         };
 
         const THEME_KEY = 'tolei-portfolio-theme';
         const params = new URLSearchParams(location.search);
-        let currentLang = (params.get('lang') === 'en' || location.pathname.includes('cv-en')) ? 'en' : 'es';
-        let renderToken = 0;
-        let pdfjsLib = null;
+        let currentLang = params.get('lang') === 'en' ? 'en' : 'es';
 
         const pagesEl = document.getElementById('cv-pages');
         const stageEl = document.querySelector('.cv-stage');
-        const loadingEl = document.querySelector('[data-cv-loading]');
-        const fallbackEl = document.querySelector('[data-cv-fallback]');
         const downloadEl = document.querySelector('[data-cv-download]');
         const downloadLabel = document.querySelector('[data-cv-download-label]');
-        const openEl = document.querySelector('[data-cv-open]');
         const backEl = document.querySelector('[data-cv-back]');
 
         function getTheme() {
             return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
         }
 
-        function syncThemeMeta() {
-            const theme = getTheme();
-            const meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', theme === 'dark' ? '#0e0e0c' : '#f6f5f2');
-        }
-
-        function currentPdf() {
+        function currentBundle() {
             const t = COPY[currentLang];
             const theme = getTheme();
             return {
-                url: t.pdf[theme],
+                theme,
+                pdf: t.pdf[theme],
                 downloadName: t.downloadName[theme],
-                theme
+                pages: t.preview[theme]
             };
         }
 
         function setUi() {
             const t = COPY[currentLang];
-            const file = currentPdf();
+            const file = currentBundle();
             document.documentElement.lang = t.lang;
             document.title = t.title;
             document.querySelector('[data-cv-eyebrow]').textContent = t.eyebrow;
             document.querySelector('[data-cv-lead]').textContent = t.lead;
             downloadLabel.textContent = t.download;
-            downloadEl.setAttribute('href', file.url);
+            downloadEl.setAttribute('href', file.pdf);
             downloadEl.setAttribute('download', file.downloadName);
-            openEl.setAttribute('href', file.url);
-            openEl.textContent = t.open;
-            document.querySelector('[data-cv-fallback-text]').textContent = t.fallback;
-            document.querySelector('[data-cv-fallback-or]').textContent = t.fallbackOr;
             backEl.textContent = t.back;
-            loadingEl.textContent = t.loading;
             stageEl.classList.toggle('cv-stage--dark-doc', file.theme === 'dark');
             stageEl.classList.toggle('cv-stage--light-doc', file.theme === 'light');
             document.querySelectorAll('.cv-lang-btn').forEach(btn => {
@@ -172,86 +147,25 @@
             if (currentLang === 'en') url.searchParams.set('lang', 'en');
             else url.searchParams.delete('lang');
             history.replaceState({}, '', url.pathname + url.search);
-            syncThemeMeta();
         }
 
-        async function ensurePdfjs() {
-            if (pdfjsLib) return pdfjsLib;
-            pdfjsLib = await import(`${PDFJS_BASE}/build/pdf.min.mjs`);
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `${PDFJS_BASE}/build/pdf.worker.min.mjs`;
-            return pdfjsLib;
-        }
-
-        async function renderPdf() {
-            const token = ++renderToken;
-            const file = currentPdf();
-
-            stageEl.setAttribute('aria-busy', 'true');
-            loadingEl.hidden = false;
-            pagesEl.hidden = true;
+        function renderPreview() {
+            const file = currentBundle();
             pagesEl.innerHTML = '';
-            fallbackEl.hidden = true;
-
-            try {
-                const pdfjs = await ensurePdfjs();
-                if (token !== renderToken) return;
-
-                const doc = await pdfjs.getDocument({
-                    url: file.url,
-                    cMapUrl: `${PDFJS_BASE}/cmaps/`,
-                    cMapPacked: true,
-                    standardFontDataUrl: `${PDFJS_BASE}/standard_fonts/`,
-                    useSystemFonts: true,
-                    verbosity: 0
-                }).promise;
-
-                if (token !== renderToken) return;
-
-                const stageWidth = stageEl.clientWidth || 800;
-                const maxWidth = Math.max(280, Math.min(stageWidth - 32, 900));
-
-                for (let n = 1; n <= doc.numPages; n++) {
-                    if (token !== renderToken) return;
-                    const page = await doc.getPage(n);
-                    const base = page.getViewport({ scale: 1 });
-                    const scale = Math.min(maxWidth / base.width, 2.4);
-                    const viewport = page.getViewport({ scale });
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d', { alpha: false });
-                    const outputScale = Math.min(window.devicePixelRatio || 1, 2);
-                    canvas.width = Math.floor(viewport.width * outputScale);
-                    canvas.height = Math.floor(viewport.height * outputScale);
-                    canvas.style.width = `${Math.floor(viewport.width)}px`;
-                    canvas.style.height = `${Math.floor(viewport.height)}px`;
-                    canvas.className = 'cv-page-canvas';
-                    canvas.setAttribute('aria-label', `${currentLang === 'en' ? 'Page' : 'Página'} ${n} / ${doc.numPages}`);
-                    ctx.setTransform(outputScale, 0, 0, outputScale, 0, 0);
-                    ctx.fillStyle = file.theme === 'dark' ? '#121212' : '#ffffff';
-                    ctx.fillRect(0, 0, viewport.width, viewport.height);
-                    await page.render({
-                        canvasContext: ctx,
-                        viewport,
-                        intent: 'display'
-                    }).promise;
-                    if (token !== renderToken) return;
-                    pagesEl.appendChild(canvas);
-                }
-
-                loadingEl.hidden = true;
-                pagesEl.hidden = false;
-                stageEl.setAttribute('aria-busy', 'false');
-            } catch (err) {
-                if (token !== renderToken) return;
-                console.error('CV render failed', file.url, err);
-                loadingEl.hidden = true;
-                fallbackEl.hidden = false;
-                stageEl.setAttribute('aria-busy', 'false');
-            }
+            file.pages.forEach((src, i) => {
+                const img = document.createElement('img');
+                img.className = 'cv-page-canvas';
+                img.src = src;
+                img.alt = `${currentLang === 'en' ? 'Page' : 'Página'} ${i + 1}`;
+                img.loading = i === 0 ? 'eager' : 'lazy';
+                img.decoding = 'async';
+                pagesEl.appendChild(img);
+            });
         }
 
-        async function refresh() {
+        function refresh() {
             setUi();
-            await renderPdf();
+            renderPreview();
         }
 
         document.querySelectorAll('.cv-lang-btn').forEach(btn => {
@@ -265,14 +179,9 @@
 
         const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
         document.documentElement.setAttribute('data-theme', savedTheme);
-        syncThemeMeta();
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', savedTheme === 'dark' ? '#0e0e0c' : '#f6f5f2');
         refresh();
-
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => renderPdf(), 280);
-        });
     </script>
 </body>
 </html>
