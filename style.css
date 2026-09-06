@@ -1518,3 +1518,120 @@ a { color: inherit; }
         transform: none;
     }
 }
+
+/* ── CV viewer page ── */
+.cv-page {
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.cv-top {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: var(--stroke) solid var(--ink);
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+}
+
+.cv-top-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 64px;
+    padding-block: 12px;
+}
+
+.cv-top-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.cv-main {
+    padding: 36px 0 56px;
+}
+
+.cv-head {
+    margin-bottom: 24px;
+    max-width: 640px;
+}
+
+.cv-title {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--text);
+    margin: 0 0 8px;
+}
+
+.cv-lead {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.98rem;
+}
+
+.cv-stage {
+    border: var(--stroke) solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    min-height: min(78vh, 980px);
+}
+
+.cv-frame {
+    display: block;
+    width: 100%;
+    height: min(78vh, 980px);
+    border: 0;
+    background: #111;
+}
+
+.cv-fallback {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+}
+
+.cv-fallback a {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    .cv-top-inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cv-top-actions {
+        justify-content: stretch;
+    }
+
+    .cv-top-actions .btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .cv-stage,
+    .cv-frame {
+        min-height: 70vh;
+        height: 70vh;
+    }
+}
+
+@media print {
+    .cv-top,
+    .cv-head,
+    .cv-fallback { display: none !important; }
+
+    .cv-main { padding: 0; }
+    .cv-stage { border: 0; box-shadow: none; }
+    .cv-frame { height: 100vh; }
+}

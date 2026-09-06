@@ -263,8 +263,8 @@ const CV_FILES = {
     en: 'assets/cv/leonel-gallo-2026-en.pdf'
 };
 const CV_PAGES = {
-    es: 'assets/cv/leonel-gallo-2026.pdf',
-    en: 'assets/cv/leonel-gallo-2026-en.pdf'
+    es: 'cv.html',
+    en: 'cv-en.html'
 };
 const LANG_KEY = 'tolei-portfolio-lang';
 
@@ -277,8 +277,8 @@ function updateCvLinks(lang) {
     });
     document.querySelectorAll('[data-cv-page]').forEach(el => {
         el.setAttribute('href', page);
-        el.setAttribute('target', '_blank');
-        el.setAttribute('rel', 'noopener noreferrer');
+        el.removeAttribute('target');
+        el.removeAttribute('rel');
         el.removeAttribute('download');
     });
 }

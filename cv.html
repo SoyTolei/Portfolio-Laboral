@@ -1,12 +1,58 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=assets/cv/leonel-gallo-2026.pdf">
-    <title>Leonel Gallo — CV</title>
-    <script>location.replace('assets/cv/leonel-gallo-2026.pdf');</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV — Leonel Gallo | Tolei</title>
+    <meta name="description" content="Curriculum de Leonel Gallo (Tolei). Soporte técnico, SQL Server y .NET.">
+    <link rel="canonical" href="https://tolei.dev/cv.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0e0e0c">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        (function () {
+            var theme = localStorage.getItem('tolei-portfolio-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
-<body>
-    <p><a href="assets/cv/leonel-gallo-2026.pdf">Abrir CV (PDF)</a></p>
+<body class="cv-page">
+    <header class="cv-top">
+        <div class="wrap cv-top-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-mark">tolei</span>
+                <span class="brand-sub">cv</span>
+            </a>
+            <div class="cv-top-actions">
+                <a href="index.html" class="btn btn-ghost">← Portfolio</a>
+                <a class="btn btn-primary" href="assets/cv/leonel-gallo-2026.pdf" download="Leonel-Gallo-CV.pdf">Descargar PDF</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="cv-main">
+        <div class="wrap">
+            <header class="cv-head">
+                <p class="block-eyebrow">// curriculum</p>
+                <h1 class="cv-title">Leonel Gallo</h1>
+                <p class="cv-lead">Analista de soporte técnico · SQL Server · .NET</p>
+            </header>
+            <div class="cv-stage">
+                <iframe
+                    class="cv-frame"
+                    src="assets/cv/leonel-gallo-2026.pdf#view=FitH"
+                    title="CV Leonel Gallo"
+                ></iframe>
+            </div>
+            <p class="cv-fallback">
+                Si no se ve el preview,
+                <a href="assets/cv/leonel-gallo-2026.pdf" target="_blank" rel="noopener">abrí el PDF</a>
+                o usá Descargar.
+            </p>
+        </div>
+    </main>
 </body>
 </html>
