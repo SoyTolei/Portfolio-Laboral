@@ -1550,32 +1550,6 @@ a { color: inherit; }
     justify-content: flex-end;
 }
 
-@media (max-width: 640px) {
-    .cv-top-inner {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .cv-top-inner .btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .cv-head-top {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .cv-head-actions {
-        width: 100%;
-    }
-
-    .cv-head-actions .cv-download {
-        flex: 1;
-        justify-content: center;
-    }
-}
-
 .cv-main {
     padding: 36px 0 56px;
 }
