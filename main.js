@@ -165,7 +165,7 @@ const translations = {
         contact_title: 'Contacto',
         contact_subtitle: 'Consultas técnicas, herramientas de soporte u oportunidades en IT.',
         contact_email_label: 'email',
-        contact_email_value: '@gmail',
+        contact_email_value: 'leonelgallo@gmail.com',
         footer_text: 'Tolei · Leonel Gallo · Buenos Aires'
     },
     en: {
@@ -251,7 +251,7 @@ const translations = {
         contact_title: 'Contact',
         contact_subtitle: 'Technical queries, support tooling or IT opportunities.',
         contact_email_label: 'email',
-        contact_email_value: '@gmail',
+        contact_email_value: 'leonelgallo@gmail.com',
         footer_text: 'Tolei · Leonel Gallo · Buenos Aires'
     }
 };
@@ -262,7 +262,10 @@ const CV_FILES = {
     es: 'assets/cv/leonel-gallo-2026.pdf',
     en: 'assets/cv/leonel-gallo-2026-en.pdf'
 };
-const CV_PAGES = { es: 'cv.html', en: 'cv-en.html' };
+const CV_PAGES = {
+    es: 'assets/cv/leonel-gallo-2026.pdf',
+    en: 'assets/cv/leonel-gallo-2026-en.pdf'
+};
 const LANG_KEY = 'tolei-portfolio-lang';
 
 function updateCvLinks(lang) {
@@ -274,6 +277,8 @@ function updateCvLinks(lang) {
     });
     document.querySelectorAll('[data-cv-page]').forEach(el => {
         el.setAttribute('href', page);
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener noreferrer');
         el.removeAttribute('download');
     });
 }
