@@ -1597,6 +1597,20 @@ a { color: inherit; }
     box-shadow: var(--shadow-lg);
     overflow: hidden;
     min-height: 240px;
+    /* Evita que el navegador "auto-dark" rompa las previews del CV */
+    color-scheme: only light;
+}
+
+.cv-page-canvas {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    border: var(--stroke) solid var(--ink);
+    border-radius: 4px;
+    box-shadow: var(--shadow-sm);
+    background: #fff;
+    forced-color-adjust: none;
 }
 
 .cv-stage--dark-doc {
@@ -1635,19 +1649,9 @@ a { color: inherit; }
     background: #d8d6d0;
 }
 
-.cv-page-canvas {
-    display: block;
-    width: 100%;
-    max-width: 900px;
-    height: auto;
-    border: var(--stroke) solid var(--ink);
-    border-radius: 4px;
-    box-shadow: var(--shadow-sm);
-    background: #fff;
-}
-
 .cv-stage--dark-doc .cv-page-canvas {
     border-color: #2a2a2a;
+    background: #10141c;
 }
 
 .cv-lang {
