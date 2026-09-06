@@ -525,16 +525,16 @@ a { color: inherit; }
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 320px;
+    min-height: 400px;
     width: 100%;
-    max-width: 340px;
+    max-width: 420px;
     margin-inline: auto;
     overflow: visible;
 }
 
 .avatar-ring {
-    width: min(232px, 50vw);
-    height: min(232px, 50vw);
+    width: min(300px, 62vw);
+    height: min(300px, 62vw);
     border-radius: 50%;
     padding: 4px;
     background: var(--accent);
@@ -587,8 +587,10 @@ a { color: inherit; }
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
     image-rendering: pixelated;
     image-rendering: crisp-edges;
-    padding: 6% 4% 2%;
+    padding: 2% 1% 0;
     box-sizing: border-box;
+    transform: scale(1.12);
+    transform-origin: center center;
 }
 
 .hero-chips {
@@ -1443,7 +1445,8 @@ a { color: inherit; }
 
     .hero-visual {
         order: -1;
-        min-height: 250px;
+        min-height: 300px;
+        max-width: 340px;
     }
 
     .hero-chips { display: none; }
