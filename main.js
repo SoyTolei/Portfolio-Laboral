@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNav();
     initNavSpy();
     initWorkHoverPreviews();
+    initAvatarPixels();
 });
 
 /* ── Nav ── */
@@ -39,6 +40,142 @@ function initNav() {
             if (target) window.scrollTo({ top: target.offsetTop - 64, behavior: 'smooth' });
         });
     });
+}
+
+/* ── Avatar pixel shimmer ── */
+function initAvatarPixels() {
+    const canvas = document.querySelector('.avatar-pixels');
+    const trigger = document.querySelector('.hero-visual');
+    if (!canvas || !trigger) return;
+
+    const ctx = canvas.getContext('2d');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const gap = 6;
+    const palettes = {
+        dark: ['#f35c19', '#c9490f', '#7a3a1c'],
+        light: ['#f35c19', '#e0762f', '#c9490f']
+    };
+
+    let pixels = [];
+    let frame = null;
+    let last = performance.now();
+
+    function rand(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function build() {
+        const rect = canvas.getBoundingClientRect();
+        const w = Math.floor(rect.width);
+        const h = Math.floor(rect.height);
+        if (!w || !h) return;
+
+        canvas.width = w;
+        canvas.height = h;
+
+        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const colors = palettes[theme] || palettes.dark;
+        const cx = w / 2;
+        const cy = h / 2;
+        const radius = Math.min(w, h) / 2;
+
+        pixels = [];
+        for (let x = 0; x < w; x += gap) {
+            for (let y = 0; y < h; y += gap) {
+                const dx = x - cx;
+                const dy = y - cy;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance > radius - 2) continue;
+
+                pixels.push({
+                    x,
+                    y,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: rand(0.1, 0.9) * 0.04,
+                    size: 0,
+                    sizeStep: Math.random() * 0.4,
+                    minSize: 0.5,
+                    maxSize: rand(0.5, 2),
+                    delay: reduced ? 0 : distance,
+                    counter: 0,
+                    counterStep: Math.random() * 4 + (w + h) * 0.01,
+                    idle: false,
+                    reverse: false,
+                    shimmer: false
+                });
+            }
+        }
+    }
+
+    function draw(p) {
+        const offset = (2 - p.size) * 0.5;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x + offset, p.y + offset, p.size, p.size);
+    }
+
+    function appear(p) {
+        p.idle = false;
+        if (p.counter <= p.delay) {
+            p.counter += p.counterStep;
+            return;
+        }
+        if (p.size >= p.maxSize) p.shimmer = true;
+
+        if (p.shimmer) {
+            if (p.size >= p.maxSize) p.reverse = true;
+            else if (p.size <= p.minSize) p.reverse = false;
+            p.size += p.reverse ? -p.speed : p.speed;
+        } else {
+            p.size += p.sizeStep;
+        }
+        draw(p);
+    }
+
+    function disappear(p) {
+        p.shimmer = false;
+        p.counter = 0;
+        if (p.size <= 0) {
+            p.idle = true;
+            return;
+        }
+        p.size -= 0.1;
+        draw(p);
+    }
+
+    function animate(step) {
+        frame = requestAnimationFrame(() => animate(step));
+
+        const now = performance.now();
+        const passed = now - last;
+        if (passed < 1000 / 60) return;
+        last = now - (passed % (1000 / 60));
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        let allIdle = true;
+        pixels.forEach(p => {
+            step(p);
+            if (!p.idle) allIdle = false;
+        });
+
+        if (allIdle) cancelAnimationFrame(frame);
+    }
+
+    function run(step) {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => animate(step));
+    }
+
+    trigger.addEventListener('pointerenter', () => run(appear));
+    trigger.addEventListener('pointerleave', () => run(disappear));
+
+    new ResizeObserver(build).observe(canvas);
+    new MutationObserver(build).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+    });
+
+    build();
 }
 
 function initNavSpy() {
