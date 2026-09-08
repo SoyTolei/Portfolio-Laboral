@@ -42,6 +42,22 @@
                 <span class="open-btn__label" data-slot="openLabel"></span>
                 <span class="open-btn__ring" aria-hidden="true"></span>
             </button>
+
+            <!-- Botón de la música de la portada. Los navegadores no dejan
+                 sonar nada sin un toque, así que este es el toque. -->
+            <button class="sound-btn" id="soundBtn" type="button" aria-pressed="false">
+                <svg class="sound-btn__icon sound-btn__icon--off" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M11 5.5v13a.8.8 0 0 1-1.32.6L6.2 16H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h2.2l3.48-3.1A.8.8 0 0 1 11 5.5z" />
+                    <path d="M15.5 9.5l5 5m0-5l-5 5" stroke-width="1.7" stroke-linecap="round" fill="none" />
+                </svg>
+                <svg class="sound-btn__icon sound-btn__icon--on" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M11 5.5v13a.8.8 0 0 1-1.32.6L6.2 16H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h2.2l3.48-3.1A.8.8 0 0 1 11 5.5z" />
+                    <path d="M15.2 9a4.2 4.2 0 0 1 0 6M17.9 6.6a7.6 7.6 0 0 1 0 10.8"
+                          stroke-width="1.7" stroke-linecap="round" fill="none" />
+                </svg>
+                <span class="sound-btn__label" data-slot="soundLabel"></span>
+            </button>
+
             <p class="intro__hint" data-slot="introHint"></p>
         </div>
     </div>

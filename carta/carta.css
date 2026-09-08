@@ -110,6 +110,42 @@ img { max-width: 100%; display: block; }
     color: var(--ink-soft);
     font-size: 1.0625rem;
 }
+/* ── Botón de música de la portada ───────────────────────────────────
+   Discreto pero visible: si no se ve, ella nunca sabría que hay música,
+   porque el navegador no la deja sonar sin un toque. */
+.sound-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-top: 2rem;
+    padding: .625rem 1.125rem;
+    border: 1px solid var(--rose-soft);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink-soft);
+    font-family: var(--sans);
+    font-size: .8125rem;
+    font-weight: 400;
+    letter-spacing: .04em;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+}
+.sound-btn:hover { background: rgba(188, 129, 141, .1); }
+.sound-btn:active { transform: scale(.97); }
+.sound-btn:focus-visible { outline: 2px solid var(--rose); outline-offset: .3rem; }
+
+.sound-btn__icon { width: 1.125rem; height: 1.125rem; flex: 0 0 auto; fill: currentColor; stroke: currentColor; }
+.sound-btn__icon--on { display: none; }
+.sound-btn.is-on .sound-btn__icon--off { display: none; }
+.sound-btn.is-on .sound-btn__icon--on  { display: block; }
+
+.sound-btn.is-on {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: #FFFCFC;
+}
+
 .intro__hint {
     margin: 1.75rem 0 0;
     font-size: .75rem;
@@ -709,6 +745,17 @@ img { max-width: 100%; display: block; }
 .player.is-paused .player__icon--pause { display: none; }
 .player.is-paused .player__icon--play  { display: block; }
 
+/* Si la música quedó en pausa (o el navegador la bloqueó), el botón late
+   despacio para que se note que ahí hay algo para tocar. Cuando suena,
+   se queda quieto y no molesta. */
+.player.is-paused .player__btn {
+    animation: player-call 2.4s var(--ease) infinite;
+}
+@keyframes player-call {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(188, 129, 141, .5); }
+    50%      { box-shadow: 0 0 0 .5rem rgba(188, 129, 141, 0); }
+}
+
 .player__track {
     max-width: 11rem;
     overflow: hidden;
@@ -837,6 +884,9 @@ img { max-width: 100%; display: block; }
 .has-bg .intro__kicker,
 .has-bg .intro__line,
 .has-bg .intro__hint  { color: rgba(255, 244, 247, .72); }
+.has-bg .sound-btn    { color: rgba(255, 244, 247, .8); border-color: rgba(255, 244, 247, .35); }
+.has-bg .sound-btn:hover { background: rgba(255, 244, 247, .12); }
+.has-bg .sound-btn.is-on { background: var(--rose); border-color: var(--rose); color: #FFFCFC; }
 
 /* Cierre: también claro, y sin papel, para que se vea el brillo */
 .has-bg .section--closing { background: transparent; }

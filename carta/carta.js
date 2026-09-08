@@ -229,6 +229,8 @@ const CONFIG = {
        toca el botón directo, pasa a la otra y listo.                  */
     introAudio: 'assets/intro-web.mp3',
     introVolume: 0.3,
+    soundLabel: 'Poner música',
+    soundLabelOn: 'Sonando',
 
     audio: 'assets/cancioncarta.mp3',
     song: 'Do You Want To Know A Secret — The Beatles',
@@ -1101,14 +1103,42 @@ void main() {
         introEl.volume = CONFIG.introVolume;
     }
 
+    const soundBtn = $('#soundBtn');
+
+    // Sin canción de portada, el botón no tiene nada que hacer
+    if (!introEl && soundBtn) soundBtn.remove();
+
     function tryIntroMusic() {
         if (!introEl || !introEl.paused) return;
-        introEl.play().catch(() => { /* bloqueado: esperamos un toque */ });
+        introEl.volume = CONFIG.introVolume;
+        introEl.play().catch(() => { /* bloqueado: espera el botón */ });
     }
 
     function stopIntroMusic() {
         if (!introEl || introEl.paused) return;
         fade(introEl, 0, 700, () => introEl.pause());
+    }
+
+    /* El estado del botón se sincroniza escuchando al audio, no al click:
+       así queda bien puesto tanto si arranca desde el botón como si
+       arranca sola o desde un toque en cualquier parte de la portada. */
+    if (introEl && soundBtn) {
+        const syncSoundBtn = () => {
+            const on = !introEl.paused;
+            soundBtn.classList.toggle('is-on', on);
+            soundBtn.setAttribute('aria-pressed', String(on));
+            soundBtn.querySelector('.sound-btn__label').textContent =
+                on ? CONFIG.soundLabelOn : CONFIG.soundLabel;
+        };
+
+        introEl.addEventListener('play', syncSoundBtn);
+        introEl.addEventListener('pause', syncSoundBtn);
+
+        soundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (introEl.paused) tryIntroMusic();
+            else { clearInterval(introEl._fade); introEl.pause(); }
+        });
     }
 
     /* Baja la música para que se entienda el clip, y la devuelve después.
@@ -1154,9 +1184,12 @@ void main() {
     // Intento optimista: en algunos navegadores de escritorio funciona
     tryIntroMusic();
 
-    // El respaldo que sí funciona en el celular: el primer toque
+    /* Bonus: un toque en cualquier lado de la portada también la arranca.
+       Se excluyen los dos botones: el de abrir porque cambia de canción, y
+       el de música porque si no, el pointerdown la prendería y el click
+       siguiente la apagaría en el mismo toque. */
     intro.addEventListener('pointerdown', (e) => {
-        if (e.target.closest('#openBtn')) return;   // ese toque abre la carta
+        if (e.target.closest('#openBtn') || e.target.closest('#soundBtn')) return;
         tryIntroMusic();
     });
 
