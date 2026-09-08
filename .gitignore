@@ -9,3 +9,6 @@ Thumbs.db
 credentials.json
 appsettings.local.json
 node_modules/
+
+# Fuente original de la cancion de portada (se publica intro-web.mp3)
+carta/assets/intro.mp3

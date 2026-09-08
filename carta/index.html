@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- Título neutro a propósito: si le mandás el link, la pestaña no spoilea la sorpresa -->
+    <title>Un momento</title>
+
+    <!-- No queremos que Google indexe esto colgado del dominio -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="description" content="Abrime cuando tengas un minuto.">
+    <meta property="og:title" content="Tengo algo para vos">
+    <meta property="og:description" content="Abrime cuando tengas un minuto.">
+    <meta property="og:type" content="website">
+
+    <meta name="theme-color" content="#FBF7F2">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="carta.css">
+</head>
+
+<body class="is-locked">
+
+    <!-- Fondo animado. Se activa desde CONFIG.background en carta.js;
+         si está apagado o el celu no soporta WebGL2, no se usa y queda
+         el fondo crema de siempre. -->
+    <canvas class="bg" id="bg" aria-hidden="true"></canvas>
+
+    <!-- ══ 1. PANTALLA DE APERTURA ══════════════════════════════════════ -->
+    <div class="intro" id="intro">
+        <div class="intro__inner">
+            <p class="intro__kicker" data-slot="introKicker"></p>
+            <h1 class="intro__name" data-slot="name"></h1>
+            <p class="intro__line" data-slot="introLine"></p>
+            <button class="open-btn" id="openBtn" type="button">
+                <span class="open-btn__label" data-slot="openLabel"></span>
+                <span class="open-btn__ring" aria-hidden="true"></span>
+            </button>
+            <p class="intro__hint" data-slot="introHint"></p>
+        </div>
+    </div>
+
+    <main class="page" id="page" aria-hidden="true">
+
+        <!-- ══ 2. LA CARTA ═══════════════════════════════════════════════ -->
+        <section class="section section--letter" id="carta">
+            <div class="wrap wrap--narrow">
+                <p class="eyebrow reveal" data-slot="letterEyebrow"></p>
+                <div class="letter" id="letterBody">
+                    <!-- Párrafos generados desde CONFIG.letter en carta.js -->
+                </div>
+                <p class="letter__sign reveal" data-slot="signature"></p>
+            </div>
+        </section>
+
+        <!-- ══ 3. LÍNEA DE TIEMPO ════════════════════════════════════════ -->
+        <section class="section section--alt" id="timeline">
+            <div class="wrap">
+                <header class="section__head">
+                    <p class="eyebrow reveal" data-slot="timelineEyebrow"></p>
+                    <h2 class="section__title reveal" data-slot="timelineTitle"></h2>
+                </header>
+                <ol class="timeline" id="timelineList">
+                    <!-- Hitos generados desde CONFIG.timeline -->
+                </ol>
+            </div>
+        </section>
+
+        <!-- ══ 3b. SOMBRI (órbita en corazón) ════════════════════════════ -->
+        <section class="section" id="sombri">
+            <div class="wrap">
+                <header class="section__head">
+                    <p class="eyebrow reveal" data-slot="sombriEyebrow"></p>
+                    <h2 class="section__title reveal" data-slot="sombriTitle"></h2>
+                    <p class="section__sub reveal" data-slot="sombriSub"></p>
+                </header>
+                <div class="orbit reveal" id="orbit">
+                    <!-- Armado desde CONFIG.sombri en carta.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 4. GALERÍA ════════════════════════════════════════════════ -->
+        <section class="section" id="galeria">
+            <div class="wrap">
+                <header class="section__head">
+                    <p class="eyebrow reveal" data-slot="galleryEyebrow"></p>
+                    <h2 class="section__title reveal" data-slot="galleryTitle"></h2>
+                </header>
+                <div class="gallery" id="galleryGrid">
+                    <!-- Fotos generadas desde CONFIG.gallery -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 5. MENSAJES ESCONDIDOS ════════════════════════════════════ -->
+        <section class="section section--alt" id="sorpresas">
+            <div class="wrap">
+                <header class="section__head">
+                    <p class="eyebrow reveal" data-slot="surprisesEyebrow"></p>
+                    <h2 class="section__title reveal" data-slot="surprisesTitle"></h2>
+                    <p class="section__sub reveal" data-slot="surprisesSub"></p>
+                </header>
+                <div class="cards" id="cardsGrid">
+                    <!-- Tarjetas generadas desde CONFIG.surprises -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 7. CIERRE ═════════════════════════════════════════════════ -->
+        <section class="section section--closing" id="cierre">
+            <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+            <div class="wrap wrap--narrow closing__inner">
+                <p class="eyebrow reveal" data-slot="closingEyebrow"></p>
+                <h2 class="closing__title reveal">
+                    <span data-slot="closingGreeting"></span>
+                    <em data-slot="closingName"></em>
+                </h2>
+                <p class="closing__line reveal" data-slot="closingLine"></p>
+                <p class="closing__sign reveal" data-slot="closingSign"></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ══ 6. MÚSICA (control discreto) ══════════════════════════════════ -->
+    <div class="player" id="player" hidden>
+        <button class="player__btn" id="musicBtn" type="button" aria-label="Pausar música">
+            <svg class="player__icon player__icon--pause" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="7" y="5" width="3.4" height="14" rx="1.2" />
+                <rect x="13.6" y="5" width="3.4" height="14" rx="1.2" />
+            </svg>
+            <svg class="player__icon player__icon--play" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.2-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z" />
+            </svg>
+        </button>
+        <span class="player__track" data-slot="song"></span>
+    </div>
+
+    <audio id="audio" loop preload="none"></audio>
+
+    <!-- Lightbox de la galería -->
+    <div class="lightbox" id="lightbox" hidden>
+        <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Cerrar">&times;</button>
+        <img class="lightbox__img" id="lightboxImg" alt="">
+    </div>
+
+    <script src="carta.js"></script>
+</body>
+</html>
